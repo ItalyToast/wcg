@@ -1,0 +1,31 @@
+"wcg"
+{
+	"base"		"base"
+	"title"		"WCG"
+	"maps"		""
+	"menusystem"	"1"
+	"workshopid"	""
+
+	"settings"
+	{
+		1
+		{
+			"name"		"_xp_per_kill"
+			"text"		"Xp gained per kill"
+			"help"		"When current xp reaches the level requiment, you level up"
+			"type"		"Numeric"
+			"default"	"20"
+		}
+		
+		2
+		{
+			"name"		"_xp_max_formula"
+			"text"		"Formula for calculating max xp for current level"
+			"help"		"When current xp reaches max, you level up"
+			"type"		"Text"
+			"default"	"200+level^2"
+		}
+		
+	}
+
+}
