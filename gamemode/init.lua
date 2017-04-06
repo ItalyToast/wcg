@@ -108,7 +108,7 @@ end
 function GM:CheckPassword( steamid, networkid, server_password, password, name )
 
 	-- Dev override
-	if( steamid == "STEAM_1:1:58400760" )
+	if( steamid == "STEAM_1:1:58400760" ) then
 	
 	-- The server has sv_password set
 	if ( server_password != "" ) then
