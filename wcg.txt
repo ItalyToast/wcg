@@ -20,7 +20,7 @@
 		2
 		{
 			"name"		"_xp_max_formula"
-			"text"		"Formula for calculating max xp for current level"
+			"text"		"Xp formula"
 			"help"		"When current xp reaches max, you level up"
 			"type"		"Text"
 			"default"	"200+level^2"
