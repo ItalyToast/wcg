@@ -2,6 +2,7 @@
 include("shared.lua")
 include("cl_pickteam.lua")
 include("cl_pickrace.lua")
+include("cl_scoreboard.lua")
 
 --[[---------------------------------------------------------
 	Name: gamemode:Initialize()
