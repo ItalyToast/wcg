@@ -1,6 +1,9 @@
 -- File is called when client loads the gamemode
 include("shared.lua")
-
+include("cl_pickteam.lua")
+include("cl_pickrace.lua")
+include("cl_scoreboard.lua")
+include("cl_xpbar.lua")
 
 --[[---------------------------------------------------------
 	Name: gamemode:Initialize()
@@ -107,6 +110,10 @@ function GM:OnPlayerChat( player, strText, bTeamOnly, bPlayerIsDead )
 	table.insert( tab, ": " .. strText )
 
 	chat.AddText( unpack(tab) )
+	
+	if(strText == "cr") then
+		RacePicker.ShowRace(RacePicker)
+	end
 
 	return true
 
