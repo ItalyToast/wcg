@@ -13,7 +13,7 @@ GM.Name = "WCG"
 GM.Author = "Brutal Tiger Dad, FjZ345"
 GM.Email = "N/A"
 GM.Website = "N/A"
-GM.TeamBased = false
+GM.TeamBased = true
 
 --[[---------------------------------------------------------
    Name: gamemode:PlayerHurt( )
@@ -117,7 +117,8 @@ function GM:CreateTeams()
 	-- Don't do this if not teambased. But if it is teambased we
 	-- create a few teams here as an example. If you're making a teambased
 	-- gamemode you should override this function in your gamemode
-
+	print("Create teams")
+	
 	if ( !GAMEMODE.TeamBased ) then return end
 
 	TEAM_BLUE = 1
