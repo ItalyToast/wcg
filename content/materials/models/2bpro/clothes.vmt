@@ -1,0 +1,10 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/2bpro/clothes"
+	"$bumpmap" "models/2bpro/clothes_normal"
+	"$phongexponenttexture" "models/2bpro/clothes_specular"
+
+		"$phong" "1"
+	"$phongboost"	"2"
+	"$phongfresnelranges"	"[0.0 0.5 1.0]"
+}

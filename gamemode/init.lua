@@ -6,7 +6,6 @@ AddCSLuaFile("cl_pickrace.lua")
 AddCSLuaFile("cl_xpbar.lua")
 
 include("shared.lua")
-
 include("player.lua")
 
 GM.PlayerSpawnTime = {}
@@ -102,7 +101,6 @@ function GM:ShowTeam( ply )
 	
 	local TimeBetweenSwitches = GAMEMODE.SecondsBetweenTeamSwitches or 10
 	if ( ply.LastTeamSwitch && RealTime() - ply.LastTeamSwitch < TimeBetweenSwitches ) then
-		ply.LastTeamSwitch = ply.LastTeamSwitch + 1
 		ply:ChatPrint( Format( "Please wait %i more seconds before trying to change team again", ( TimeBetweenSwitches - ( RealTime() - ply.LastTeamSwitch ) ) + 1 ) )
 		return false
 	end
@@ -125,16 +123,16 @@ function GM:CheckPassword( steamid, networkid, server_password, password, name )
 	if( steamid == "STEAM_1:1:58400760" ) then
 		return true
 	end
-	
-	-- The server has sv_password set
-	if ( server_password != "" ) then
+    
+    -- The server has sv_password set
+    if ( server_password != "" ) then
 
-		-- The joining clients password doesn't match sv_password
-		if ( server_password != password ) then
-			return false
-		end
+        -- The joining clients password doesn't match sv_password
+        if ( server_password != password ) then
+            return false
+        end
 
-	end
+    end
 	
 	--
 	-- Returning true means they're allowed to join the server

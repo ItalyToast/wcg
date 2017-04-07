@@ -81,11 +81,10 @@ end
 		Process the player's chat.. return true for no default
 -----------------------------------------------------------]]
 function GM:OnPlayerChat( player, strText, bTeamOnly, bPlayerIsDead )
-		
-	if(strText == "cr") then
+    
+    if(strText == "cr") then
 		RacePicker.ShowRace(RacePicker, player)
 	end
-	
 	--
 	-- I've made this all look more complicated than it is. Here's the easy version
 	--

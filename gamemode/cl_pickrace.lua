@@ -7,7 +7,7 @@ RacePicker = {}
    Desc:
 -----------------------------------------------------------]]
 function RacePicker:ShowRace(player)
-	
+
 	print("pick race")
 	if ( IsValid( self.RaceSelectFrame ) ) then return end
 	
@@ -38,7 +38,7 @@ function RacePicker:ShowRace(player)
 		
 			--Create Button
 			local Race = vgui.Create( "DButton", self.RaceSelectFrame )
-			function Race.DoClick()
+            function Race.DoClick()
 				self.HideRace(self)
 				RunConsoleCommand( "say", "You are now: " .. race["name"] )
 				-- Change race

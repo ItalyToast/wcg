@@ -1,0 +1,10 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/2bpro/skin"
+	"$bumpmap" "models/2bpro/skin_normal"
+	
+	"$phong" "1"
+	"$phongboost" "5"
+	"$phongexponent" "12"
+	"$phongfresnelranges"			"[0.0 0.5 1.0]"
+}

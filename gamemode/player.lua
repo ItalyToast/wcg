@@ -41,7 +41,7 @@ end
 		 player should say nothing.
 -----------------------------------------------------------]]
 function GM:PlayerSay( player, text, teamonly )
-	
+
 	return text
 
 end
@@ -195,7 +195,7 @@ end
 	Desc: Called when a player spawns
 -----------------------------------------------------------]]
 function GM:PlayerSpawn( pl )
-	
+
 	--
 	-- If the player doesn't have a team in a TeamBased game
 	-- then spawn him as a spectator
@@ -214,16 +214,16 @@ function GM:PlayerSpawn( pl )
 
 	player_manager.OnPlayerSpawn( pl )
 	player_manager.RunClass( pl, "Spawn" )
-	
+
 	-- Set PASSIVE skills
 	--player_manager.RunClass( pl, "SetPassives", 0)
-
+    
 	-- Call item loadout function
 	hook.Call( "PlayerLoadout", GAMEMODE, pl )
 	
 	-- Set player model
-	hook.Call( "PlayerSetModel", GAMEMODE, pl )
-	
+	--hook.Call( "PlayerSetModel", GAMEMODE, pl )
+
 end
 
 --[[---------------------------------------------------------
@@ -593,7 +593,7 @@ function GM:PlayerJoinTeam( ply, teamid )
 
 	ply:SetTeam( teamid )
 	ply.LastTeamSwitch = RealTime()
-	
+    
 	GAMEMODE:OnPlayerChangedTeam( ply, iOldTeam, teamid )
 
 end
@@ -602,7 +602,7 @@ end
 	Name: gamemode:OnPlayerChangedTeam( ply, oldteam, newteam )
 -----------------------------------------------------------]]
 function GM:OnPlayerChangedTeam( ply, oldteam, newteam )
-
+    
 	-- Here's an immediate respawn thing by default. If you want to
 	-- re-create something more like CS or some shit you could probably
 	-- change to a spectator or something while dead.
@@ -625,7 +625,17 @@ function GM:OnPlayerChangedTeam( ply, oldteam, newteam )
 		-- team that we chose
 		
 	end
-	
+    
+    if(newteam == 1) then
+        
+        -- Blue team
+        ply:SetModel( "models/mua2/spiderman.mdl" )
+    elseif(newteam == 2) then
+        
+        -- Orange team
+        ply:SetModel( "models/prototype/2bpro.mdl" )
+    end
+    
 	PrintMessage( HUD_PRINTTALK, Format( "%s joined '%s'", ply:Nick(), team.GetName( newteam ) ) )
 	
 end

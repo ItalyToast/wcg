@@ -1,0 +1,9 @@
+"vertexlitGeneric"
+{
+	"$basetexture" "models/2bpro/hair"
+
+
+		"$phong" "1"
+	"$phongboost"	"2"
+	"$phongfresnelranges"	"[0.0 0.5 1.0]"
+}

@@ -1,0 +1,11 @@
+"vertexlitgeneric"
+{
+	"$baseTexture" "models\MUA2\Spiderman\lower_diff"
+	"$bumpmap" "models\MUA2\Spiderman\lower_bump"
+	"$halflambert" "1"
+
+	"$phong" "1"
+	"$phongexponent" 20
+	"$phongboost"	".25"
+	"$phongfresnelranges"	"[0.1 0.5 1]"
+}

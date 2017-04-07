@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\yyxa/body"
+	"$bumpmap" "models\yyxa/body_normals"
+
+}
