@@ -1,10 +1,11 @@
-
+print("exec cl_pickteam.lua")
 --[[---------------------------------------------------------
    Name: gamemode:ShowTeam()
    Desc:
 -----------------------------------------------------------]]
 function GM:ShowTeam()
 
+	print("pick team")
 	if ( IsValid( self.TeamSelectFrame ) ) then return end
 	
 	-- Simple team selection box
@@ -16,18 +17,19 @@ function GM:ShowTeam()
 	for ID, TeamInfo in pairs ( AllTeams ) do
 	
 		if ( ID != TEAM_CONNECTING && ID != TEAM_UNASSIGNED ) then
-	
+		
+			--Create Button
 			local Team = vgui.Create( "DButton", self.TeamSelectFrame )
 			function Team.DoClick() self:HideTeam() RunConsoleCommand( "changeteam", ID ) end
 			Team:SetPos( 10, y )
-			Team:SetSize( 130, 20 )
-			Team:SetText( TeamInfo.Name )
+			Team:SetSize( 380, 50 )
+			Team:SetText( "Team: " .. TeamInfo.Name )
 			
 			if ( IsValid( LocalPlayer() ) && LocalPlayer():Team() == ID ) then
 				Team:SetDisabled( true )
 			end
 			
-			y = y + 30
+			y = y + 70
 		
 		end
 		
@@ -44,7 +46,7 @@ function GM:ShowTeam()
 	
 	end
 	
-	self.TeamSelectFrame:SetSize( 150, y )
+	self.TeamSelectFrame:SetSize( 400, y )
 	self.TeamSelectFrame:Center()
 	self.TeamSelectFrame:MakePopup()
 	self.TeamSelectFrame:SetKeyboardInputEnabled( false )
