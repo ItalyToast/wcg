@@ -9,6 +9,9 @@
 
 -----------------------------------------------------------]]
 
+include("player_class/test_class.lua")
+include("player_class/player_default.lua")
+
 GM.Name = "WCG"
 GM.Author = "Brutal Tiger Dad, FjZ345"
 GM.Email = "N/A"

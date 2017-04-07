@@ -6,7 +6,7 @@ RacePicker = {}
    Name: gamemode:ShowTeam()
    Desc:
 -----------------------------------------------------------]]
-function RacePicker:ShowRace()
+function RacePicker:ShowRace(player)
 
 	print("pick race")
 	if ( IsValid( self.RaceSelectFrame ) ) then return end
@@ -38,7 +38,13 @@ function RacePicker:ShowRace()
 		
 			--Create Button
 			local Race = vgui.Create( "DButton", self.RaceSelectFrame )
-			function Race.DoClick() self.HideRace(self) RunConsoleCommand( "say", "You are now: " .. race["name"] ) end
+			function Race.DoClick()
+				self.HideRace(self)
+				RunConsoleCommand( "say", "You are now: " .. race["name"] )
+				-- Change race
+				player_manager.SetPlayerClass( player, "player_default" )
+				print(player_manager.GetPlayerClass(player))
+			end
 			Race:SetPos( 60, y )
 			Race:SetSize( 330, 50 )
 			Race:SetText( "Race: " .. race["name"] )

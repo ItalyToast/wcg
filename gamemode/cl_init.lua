@@ -111,7 +111,7 @@ function GM:OnPlayerChat( player, strText, bTeamOnly, bPlayerIsDead )
 	chat.AddText( unpack(tab) )
 	
 	if(strText == "cr") then
-		RacePicker.ShowRace(RacePicker)
+		RacePicker.ShowRace(RacePicker, player)
 	end
 
 	return true

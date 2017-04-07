@@ -1,7 +1,17 @@
-include("player_default.lua")
+AddCSLuaFile()
+
+local PLAYER = {}
+
+PLAYER.DisplayName = "Test Class"
+PLAYER.WalkSpeed = 1000
 
 PLAYER.skills = {}
-PLAYER.ultimate = 3
+local ultimate = 3
+
+PLAYER.skills[0] = {}
+PLAYER.skills[1] = {}
+PLAYER.skills[2] = {}
+PLAYER.skills[ultimate] = {}
 
 PLAYER.skills[0].Name = "Speed"
 PLAYER.skills[0].Desc = "Gives you bonus speed"
@@ -25,7 +35,7 @@ PLAYER.skills[ultimate].Values = {200, 30, 40, 50}
 
 function PLAYER:SetPassives(level)
 	-- Skill0
-	PLAYER.Speed = 400*PLAYER.skills[0].Values[level]
+	PLAYER.WalkSpeed = 400*PLAYER.skills[0].Values[level]
 	
 	-- Skill1
 	PLAYER.MaxHealth = 100+PLAYER.skills[1].Values[level]
@@ -39,3 +49,5 @@ end
 function PLAYER:Ultimate(client, victim)
 	victim.TakeDamage(PLAYER.skills[ultimate].Values[level], client, client)
 end
+
+player_manager.RegisterClass( "test_class", PLAYER, "player_default" )
