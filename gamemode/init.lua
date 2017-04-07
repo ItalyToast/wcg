@@ -3,6 +3,7 @@ AddCSLuaFile("shared.lua")
 AddCSLuaFile("cl_scoreboard.lua")
 AddCSLuaFile("cl_pickteam.lua")
 AddCSLuaFile("cl_pickrace.lua")
+AddCSLuaFile("cl_xpbar.lua")
 
 include("shared.lua")
 
@@ -139,5 +140,4 @@ function GM:CheckPassword( steamid, networkid, server_password, password, name )
 	-- Returning true means they're allowed to join the server
 	--
 	return true
-
 end

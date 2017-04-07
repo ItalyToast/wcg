@@ -1,4 +1,4 @@
-print("exec cl_pickteam.lua")
+print("exec cl_pickrace.lua")
 
 RacePicker = {}
 
