@@ -126,19 +126,18 @@ function GM:CheckPassword( steamid, networkid, server_password, password, name )
 		return true
 	end
 	
-		-- The server has sv_password set
-		if ( server_password != "" ) then
+	-- The server has sv_password set
+	if ( server_password != "" ) then
 
-			-- The joining clients password doesn't match sv_password
-			if ( server_password != password ) then
-				return false
-			end
-
+		-- The joining clients password doesn't match sv_password
+		if ( server_password != password ) then
+			return false
 		end
+
+	end
 	
 	--
 	-- Returning true means they're allowed to join the server
 	--
 	return true
-	end
 end
