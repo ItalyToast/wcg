@@ -114,19 +114,19 @@ function GM:CheckPassword( steamid, networkid, server_password, password, name )
 	-- Dev override
 	if( steamid == "STEAM_1:1:58400760" ) then
 	
-	-- The server has sv_password set
-	if ( server_password != "" ) then
+		-- The server has sv_password set
+		if ( server_password != "" ) then
 
-		-- The joining clients password doesn't match sv_password
-		if ( server_password != password ) then
-			return false
+			-- The joining clients password doesn't match sv_password
+			if ( server_password != password ) then
+				return false
+			end
+
 		end
-
-	end
 	
 	--
 	-- Returning true means they're allowed to join the server
 	--
 	return true
-
+	end
 end
