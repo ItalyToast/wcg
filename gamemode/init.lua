@@ -3,6 +3,7 @@ AddCSLuaFile("shared.lua")
 AddCSLuaFile("cl_scoreboard.lua")
 AddCSLuaFile("cl_pickteam.lua")
 AddCSLuaFile("cl_pickrace.lua")
+AddCSLuaFile("cl_xpbar.lua")
 
 include("shared.lua")
 
