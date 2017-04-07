@@ -7,7 +7,7 @@ RacePicker = {}
    Desc:
 -----------------------------------------------------------]]
 function RacePicker:ShowRace(player)
-
+	
 	print("pick race")
 	if ( IsValid( self.RaceSelectFrame ) ) then return end
 	
@@ -42,6 +42,7 @@ function RacePicker:ShowRace(player)
 				self.HideRace(self)
 				RunConsoleCommand( "say", "You are now: " .. race["name"] )
 				-- Change race
+				print(player_manager.GetPlayerClass(player))
 				player_manager.SetPlayerClass( player, "player_default" )
 				print(player_manager.GetPlayerClass(player))
 			end

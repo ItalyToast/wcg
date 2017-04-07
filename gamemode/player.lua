@@ -41,7 +41,7 @@ end
 		 player should say nothing.
 -----------------------------------------------------------]]
 function GM:PlayerSay( player, text, teamonly )
-
+	
 	return text
 
 end
@@ -195,7 +195,7 @@ end
 	Desc: Called when a player spawns
 -----------------------------------------------------------]]
 function GM:PlayerSpawn( pl )
-
+	
 	--
 	-- If the player doesn't have a team in a TeamBased game
 	-- then spawn him as a spectator
@@ -216,14 +216,14 @@ function GM:PlayerSpawn( pl )
 	player_manager.RunClass( pl, "Spawn" )
 	
 	-- Set PASSIVE skills
-	player_manager.RunClass( pl, "SetPassives", 0)
+	--player_manager.RunClass( pl, "SetPassives", 0)
 
 	-- Call item loadout function
 	hook.Call( "PlayerLoadout", GAMEMODE, pl )
 	
 	-- Set player model
 	hook.Call( "PlayerSetModel", GAMEMODE, pl )
-
+	
 end
 
 --[[---------------------------------------------------------
