@@ -15,19 +15,22 @@ function RacePicker:ShowRace()
 	self.RaceSelectFrame = vgui.Create( "DFrame" )
 	self.RaceSelectFrame:SetTitle( "Pick Race" )
 	
-	local AllRaces = { "Undead", "Human", "Orc"}
+	local Undead = { name = "Undead", icon = "materials/icon16/arrow_in.png" }
+	local Human = { name = "Human", icon = "materials/icon16/basket.png" }
+	local Orc = { name = "Human", icon = "materials/icon16/bell.png" }
 	
-	local AllTeams = team.GetAllTeams()
+	local AllRaces = { Undead, Human, Orc}
+	
 	local y = 30
-	for raceName in pairs ( AllRaces ) do
+	for i, race in pairs(AllRaces) do
 	
 		if ( ID != TEAM_CONNECTING && ID != TEAM_UNASSIGNED ) then
 		
 			--Creat Icon
-			local RaceIcon = vgui.Create( "DPanel", self.RaceSelectFrame )
+			local RaceIcon = vgui.Create( "DImage", self.RaceSelectFrame )
 			RaceIcon:SetPos( 10, y )
 			RaceIcon:SetSize( 50, 50 )
-			RaceIcon:SetText( "Race: " .. raceName )
+			RaceIcon:SetImage( race["icon"] )
 			
 			--if ( IsValid( LocalPlayer() ) && LocalPlayer():Race() == ID ) then
 			--	Race:SetDisabled( true )
@@ -35,10 +38,10 @@ function RacePicker:ShowRace()
 		
 			--Create Button
 			local Race = vgui.Create( "DButton", self.RaceSelectFrame )
-			function Race.DoClick() self.HideRace(self) RunConsoleCommand( "say", "You are now: " .. raceName ) end
+			function Race.DoClick() self.HideRace(self) RunConsoleCommand( "say", "You are now: " .. race["name"] ) end
 			Race:SetPos( 60, y )
 			Race:SetSize( 330, 50 )
-			Race:SetText( "Race: " .. raceName )
+			Race:SetText( "Race: " .. race["name"] )
 			
 			--if ( IsValid( LocalPlayer() ) && LocalPlayer():Race() == ID ) then
 			--	Race:SetDisabled( true )
