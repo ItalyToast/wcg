@@ -15,6 +15,14 @@ GM.PlayerSpawnTime = {}
    Desc: Called immediately after starting the gamemode
 -----------------------------------------------------------]]
 function GM:Initialize()
+	
+	util.AddNetworkString( "WCG_ChangeRace" )
+	net.Receive( "WCG_ChangeRace", function( len, pl )
+		if ( IsValid( pl ) and pl:IsPlayer() ) then
+			player_manager.SetPlayerClass(pl, net.ReadString())
+		end
+	end )
+	
 end
 
 --[[---------------------------------------------------------

@@ -42,9 +42,9 @@ function RacePicker:ShowRace(player)
 				self.HideRace(self)
 				RunConsoleCommand( "say", "You are now: " .. race["name"] )
 				-- Change race
-				print(player_manager.GetPlayerClass(player))
-				player_manager.SetPlayerClass( player, "player_default" )
-				print(player_manager.GetPlayerClass(player))
+				net.Start( "WCG_ChangeRace" )
+				net.WriteString( "player_default" )
+				net.SendToServer()
 			end
 			Race:SetPos( 60, y )
 			Race:SetSize( 330, 50 )
