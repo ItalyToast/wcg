@@ -7,6 +7,8 @@ AddCSLuaFile("cl_xpbar.lua")
 
 include("shared.lua")
 
+include("player.lua")
+
 GM.PlayerSpawnTime = {}
 
 --[[---------------------------------------------------------
@@ -14,6 +16,14 @@ GM.PlayerSpawnTime = {}
    Desc: Called immediately after starting the gamemode
 -----------------------------------------------------------]]
 function GM:Initialize()
+	
+	util.AddNetworkString( "WCG_ChangeRace" )
+	net.Receive( "WCG_ChangeRace", function( len, pl )
+		if ( IsValid( pl ) and pl:IsPlayer() ) then
+			player_manager.SetPlayerClass(pl, net.ReadString())
+		end
+	end )
+	
 end
 
 --[[---------------------------------------------------------
@@ -113,6 +123,8 @@ function GM:CheckPassword( steamid, networkid, server_password, password, name )
 
 	-- Dev override
 	if( steamid == "STEAM_1:1:58400760" ) then
+		return true
+	end
 	
 		-- The server has sv_password set
 		if ( server_password != "" ) then

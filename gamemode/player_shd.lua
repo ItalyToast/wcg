@@ -26,14 +26,7 @@ end
    Desc: Return true if player can enter vehicle
 -----------------------------------------------------------]]
 function GM:CanPlayerEnterVehicle( player, vehicle, role )
-	return true
-end
-
---[[---------------------------------------------------------
-   Name: gamemode:PlayerEnteredVehicle( player, vehicle, role )
-   Desc: Player entered the vehicle fine
------------------------------------------------------------]]
-function GM:PlayerEnteredVehicle( player, vehicle, role )
+	return false
 end
 
 --[[---------------------------------------------------------
