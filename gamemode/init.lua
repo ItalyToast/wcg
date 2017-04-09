@@ -12,6 +12,7 @@ include("shared.lua")
 
 --Server Files
 include("level.lua")
+include("player.lua")
 
 GM.PlayerSpawnTime = {}
 

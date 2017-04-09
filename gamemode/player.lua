@@ -217,8 +217,8 @@ function GM:PlayerSpawn( pl )
 	player_manager.OnPlayerSpawn( pl )
 	player_manager.RunClass( pl, "Spawn" )
 	
-	
-	pl:ChatPrint( "XP: " .. get_xp(pl) .. "/1000" )
+	pl:ChatPrint( "Race: " .. db_get_race(pl) .. " Level: " .. db_get_level(pl) )
+	pl:ChatPrint( "XP: " .. db_get_xp(pl) .. "/1000" )
 
 	-- Call item loadout function
 	hook.Call( "PlayerLoadout", GAMEMODE, pl )

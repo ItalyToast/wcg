@@ -4,17 +4,17 @@ function set_xp_console(player, cmd, args, argStr)
 	print(argStr)
 	local amount = tonumber(argStr)
 	if(amount != nil) then
-		set_xp(player, amount)
+		db_set_xp(player, amount)
 		print( "set xp: " .. amount)
 	end
 end
 
 function get_xp_console(player, cmd, args, argStr)
-	print(get_xp(player))
+	print(db_get_xp(player))
 end
 
 
-function set_xp(player, xp, classid)
+function db_set_xp(player, xp, classid)
 	if(classid == nil) then classid = player:GetClassID() end
 
 	if(isnumber(xp)) then
@@ -24,13 +24,13 @@ function set_xp(player, xp, classid)
 	end
 end
 
-function get_xp(player, classid)
+function db_get_xp(player, classid)
 	if(classid == nil) then classid = player:GetClassID() end
 	
 	return player:GetPData("class_" .. classid .. "_xp") or 0
 end
 
-function set_level(player, level, classid)
+function db_set_level(player, level, classid)
 	if(classid == nil) then classid = player:GetClassID() end
 
 	if(isnumber(level)) then
@@ -40,8 +40,22 @@ function set_level(player, level, classid)
 	end
 end
 
-function get_level(player, classid)
+function db_get_level(player, classid)
 	if(classid == nil) then classid = player:GetClassID() end
 	
 	return player:GetPData("class_" .. classid .. "_level") or 0
+end
+
+function db_set_race(player, classid)
+	if(classid == nil) then classid = player:GetClassID() end
+
+	if(isnumber(classid)) then
+		player:SetPData("selected_class", classid)
+	else
+		throw("not a number: classid")
+	end
+end
+
+function db_get_race(player)
+	return player:GetPData("selected_class") or -1
 end
