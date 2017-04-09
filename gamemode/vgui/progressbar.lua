@@ -21,7 +21,7 @@ function PANEL:Init()
    self:SetMin( 0 )
    self:SetMax( 1000 )
    self:SetValue( 253 )
-   self:SetFGColor( Color( 0, 255, 0, 255 ) )
+   self:SetFGColor( Color( 255, 255, 0, 255 ) )
    self:SetBGColor( Color( 128, 255, 128, 255 ) )
 end
 
