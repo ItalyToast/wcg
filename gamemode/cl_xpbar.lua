@@ -11,32 +11,23 @@ function XPBar:Show(xp, xp_max)
 	print("show xp bar")
 	if ( IsValid( self.XPBarPanel ) ) then return end
 	
-	-- Create XPBar
-	self.XPBarPanel = vgui.Create( "DPanel" )
-	self.XPBarPanel:SetSize( 200, 30 )
-	self.XPBarPanel:SetPos(20, 10)
-	
 	--ProgressBar
-	local XPprog = vgui.Create( "DProgress", self.XPBarPanel )
+	local XPprog = vgui.Create( "WCGProgressBar", self.XPBarPanel )
 	self.XPprog = XPprog
-	XPprog:Dock(FILL)
-	
-	--XP Text
-	local XPlbl = vgui.Create( "DLabel", self.XPBarPanel )
-	self.XPlbl = XPlbl
-	XPlbl:SetColor(Color(0, 0, 0))
+	XPprog:SetSize( 200, 30 )
+	XPprog:SetPos(20, 10)
+	XPprog:SetFGColor(Color(255, 190, 0))
+	XPprog:SetBGColor(Color(255, 255, 230))
 	
 	--Show panel
 	XPBar:SetXP(xp, xp_max)
 end
 
 function XPBar:SetXP(xp, xp_max)
-	local text = xp .. "/" .. xp_max
-	local w = surface.GetTextSize(text)
-	self.XPlbl:SetText(text)
-	self.XPprog:SetFraction(xp / xp_max)
-	self.XPlbl:SetSize(w, 30)
-	self.XPlbl:Center()
+	
+	self.XPprog:SetMax(xp_max)
+	self.XPprog:SetValue(xp)
+	
 end
 
 --[[---------------------------------------------------------

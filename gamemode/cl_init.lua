@@ -1,5 +1,12 @@
 -- File is called when client loads the gamemode
+
+-- vgui controls
+include("vgui/ProgressBar.lua")
+
+--shared files
 include("shared.lua")
+
+-- cl_ files
 include("cl_pickteam.lua")
 include("cl_pickrace.lua")
 include("cl_scoreboard.lua")
