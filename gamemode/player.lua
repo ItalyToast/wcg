@@ -196,6 +196,8 @@ end
 -----------------------------------------------------------]]
 function GM:PlayerSpawn( pl )
 
+	print("spawn")
+
 	--
 	-- If the player doesn't have a team in a TeamBased game
 	-- then spawn him as a spectator
@@ -214,6 +216,9 @@ function GM:PlayerSpawn( pl )
 
 	player_manager.OnPlayerSpawn( pl )
 	player_manager.RunClass( pl, "Spawn" )
+	
+	
+	pl:ChatPrint( "XP: " .. get_xp(pl) .. "/1000" )
 
 	-- Call item loadout function
 	hook.Call( "PlayerLoadout", GAMEMODE, pl )

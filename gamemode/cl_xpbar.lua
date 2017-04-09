@@ -16,8 +16,8 @@ function XPBar:Show(xp, xp_max)
 	self.XPprog = XPprog
 	XPprog:SetSize( 200, 30 )
 	XPprog:SetPos(20, 10)
-	XPprog:SetFGColor(Color(255, 190, 0))
-	XPprog:SetBGColor(Color(255, 255, 230))
+	XPprog:SetFGColor(Color(200, 0, 200))
+	XPprog:SetBGColor(Color(255, 230, 230))
 	
 	--Show panel
 	XPBar:SetXP(xp, xp_max)

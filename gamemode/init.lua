@@ -1,11 +1,17 @@
+--Client Side LUA files
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
 AddCSLuaFile("cl_scoreboard.lua")
 AddCSLuaFile("cl_pickteam.lua")
 AddCSLuaFile("cl_pickrace.lua")
 AddCSLuaFile("cl_xpbar.lua")
+AddCSLuaFile("vgui/progressbar.lua")
 
+--Shared files
 include("shared.lua")
+
+--Server Files
+include("level.lua")
 
 GM.PlayerSpawnTime = {}
 
@@ -14,6 +20,10 @@ GM.PlayerSpawnTime = {}
    Desc: Called immediately after starting the gamemode
 -----------------------------------------------------------]]
 function GM:Initialize()
+	
+	concommand.Add( "wcg_set_xp", set_xp_console)
+	concommand.Add( "wcg_get_xp", get_xp_console)
+
 end
 
 --[[---------------------------------------------------------
