@@ -29,6 +29,14 @@ function GM:Initialize()
 	concommand.Add( "wcg_set_xp", set_xp_console)
 	concommand.Add( "wcg_get_xp", get_xp_console)
 
+	net.Receive( "WCG_ChangeRace", function( len, pl )
+		if ( IsValid( pl ) and pl:IsPlayer() ) then
+			local class = net.ReadString()
+			print("New Race " .. class)
+			player_manager.SetPlayerClass(pl, class)
+		end
+	end )
+
 end
 
 --[[---------------------------------------------------------
@@ -128,20 +136,21 @@ function GM:CheckPassword( steamid, networkid, server_password, password, name )
 
 	-- Dev override
 	if( steamid == "STEAM_1:1:58400760" ) then
+		return true
+	end
 	
-		-- The server has sv_password set
-		if ( server_password != "" ) then
+	-- The server has sv_password set
+	if ( server_password != "" ) then
 
-			-- The joining clients password doesn't match sv_password
-			if ( server_password != password ) then
-				return false
-			end
-
+		-- The joining clients password doesn't match sv_password
+		if ( server_password != password ) then
+			return false
 		end
+
+	end
 	
 	--
 	-- Returning true means they're allowed to join the server
 	--
 	return true
-	end
 end

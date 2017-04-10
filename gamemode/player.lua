@@ -41,7 +41,7 @@ end
 		 player should say nothing.
 -----------------------------------------------------------]]
 function GM:PlayerSay( player, text, teamonly )
-
+	
 	return text
 
 end
@@ -196,8 +196,6 @@ end
 -----------------------------------------------------------]]
 function GM:PlayerSpawn( pl )
 
-	print("spawn")
-
 	--
 	-- If the player doesn't have a team in a TeamBased game
 	-- then spawn him as a spectator
@@ -217,21 +215,22 @@ function GM:PlayerSpawn( pl )
 	player_manager.OnPlayerSpawn( pl )
 	player_manager.RunClass( pl, "Spawn" )
 	
+
 	net.Start("WCG_RaceState")
 	net.WriteInt(db_get_xp(pl), 32)
 	net.WriteInt(1000, 32)
 	net.WriteInt(db_get_level(pl), 32)
 	net.Send(pl)
 	
-	pl:ChatPrint( "Race: " .. db_get_race(pl) .. " Level: " .. db_get_level(pl) )
-	pl:ChatPrint( "XP: " .. db_get_xp(pl) .. "/1000" )
+	-- Set PASSIVE skills
+	--player_manager.RunClass( pl, "SetPassives", 0)
 
 	-- Call item loadout function
 	hook.Call( "PlayerLoadout", GAMEMODE, pl )
 	
 	-- Set player model
 	hook.Call( "PlayerSetModel", GAMEMODE, pl )
-
+	
 end
 
 --[[---------------------------------------------------------

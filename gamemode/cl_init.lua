@@ -88,7 +88,11 @@ end
 		Process the player's chat.. return true for no default
 -----------------------------------------------------------]]
 function GM:OnPlayerChat( player, strText, bTeamOnly, bPlayerIsDead )
-
+		
+	if(strText == "cr") then
+		RacePicker.ShowRace(RacePicker, player)
+	end
+	
 	--
 	-- I've made this all look more complicated than it is. Here's the easy version
 	--
@@ -117,10 +121,6 @@ function GM:OnPlayerChat( player, strText, bTeamOnly, bPlayerIsDead )
 	table.insert( tab, ": " .. strText )
 
 	chat.AddText( unpack(tab) )
-	
-	if(strText == "cr") then
-		RacePicker.ShowRace(RacePicker)
-	end
 
 	return true
 
