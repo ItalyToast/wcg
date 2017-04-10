@@ -15,9 +15,9 @@ function RacePicker:ShowRace()
 	self.RaceSelectFrame = vgui.Create( "DFrame" )
 	self.RaceSelectFrame:SetTitle( "Pick Race" )
 	
-	local Undead = { name = "Undead", icon = "materials/icon16/arrow_in.png" }
-	local Human = { name = "Human", icon = "materials/icon16/basket.png" }
-	local Orc = { name = "Human", icon = "materials/icon16/bell.png" }
+	local Undead = { id = 0, name = "Undead", icon = "materials/icon16/arrow_in.png" }
+	local Human = { id = 1, name = "Human", icon = "materials/icon16/basket.png" }
+	local Orc = { id = 2, name = "Human", icon = "materials/icon16/bell.png" }
 	
 	local AllRaces = { Undead, Human, Orc}
 	
@@ -38,7 +38,7 @@ function RacePicker:ShowRace()
 		
 			--Create Button
 			local Race = vgui.Create( "DButton", self.RaceSelectFrame )
-			function Race.DoClick() self.HideRace(self) RunConsoleCommand( "say", "You are now: " .. race["name"] ) end
+			function Race.DoClick() RacePicker.ChangeRaceTo(race) self.HideRace(self) end
 			Race:SetPos( 60, y )
 			Race:SetSize( 330, 50 )
 			Race:SetText( "Race: " .. race["name"] )
@@ -69,5 +69,13 @@ function RacePicker.HideRace(self)
 		self.RaceSelectFrame:Remove()
 		self.RaceSelectFrame = nil
 	end
+
+end
+
+function RacePicker.ChangeRaceTo(race)
+
+	net.Start("WCG_ChangeRace")
+	net.WriteInt(race.id, 32)
+	net.SendToServer()
 
 end

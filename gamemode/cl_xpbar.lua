@@ -44,3 +44,15 @@ function XPBar:Hide()
 end
 
 XPBar.Show(XPBar, 50, 100)
+
+function net_WCG_LevelState(len, player)
+	
+	local xp = net.ReadInt(32)
+	local xp_max = net.ReadInt(32)
+	local level = net.ReadInt(32)
+	
+	XPBar.SetXP(XPBar, xp, xp_max)
+	
+end
+
+net.Receive("WCG_RaceState", net_WCG_LevelState)

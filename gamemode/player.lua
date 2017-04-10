@@ -217,6 +217,12 @@ function GM:PlayerSpawn( pl )
 	player_manager.OnPlayerSpawn( pl )
 	player_manager.RunClass( pl, "Spawn" )
 	
+	net.Start("WCG_RaceState")
+	net.WriteInt(db_get_xp(pl), 32)
+	net.WriteInt(1000, 32)
+	net.WriteInt(db_get_level(pl), 32)
+	net.Send(pl)
+	
 	pl:ChatPrint( "Race: " .. db_get_race(pl) .. " Level: " .. db_get_level(pl) )
 	pl:ChatPrint( "XP: " .. db_get_xp(pl) .. "/1000" )
 

@@ -14,6 +14,10 @@ include("shared.lua")
 include("level.lua")
 include("player.lua")
 
+--Network Strings
+util.AddNetworkString("WCG_RaceState")
+util.AddNetworkString("WCG_ChangeRace")
+
 GM.PlayerSpawnTime = {}
 
 --[[---------------------------------------------------------

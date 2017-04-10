@@ -13,6 +13,7 @@ function get_xp_console(player, cmd, args, argStr)
 	print(db_get_xp(player))
 end
 
+--Database Function
 
 function db_set_xp(player, xp, classid)
 	if(classid == nil) then classid = player:GetClassID() end
@@ -59,3 +60,13 @@ end
 function db_get_race(player)
 	return player:GetPData("selected_class") or -1
 end
+
+--Networking
+function net_WCG_ChangeRace(len, player)
+	local classID = net.ReadInt(32)
+	
+	player.SetClassID(classID)
+	db_set_race(classID);
+end
+
+net.Receive("WCG_ChangeRace", net_WCG_ChangeRace)
