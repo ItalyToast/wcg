@@ -20,10 +20,11 @@ util.AddNetworkString("WCG_RaceState")
 util.AddNetworkString("WCG_ChangeRace")
 
 --Console commands
-concommand.Add( "wcg_changerace", cmd_changerace)
-concommand.Add( "wcg_set_xp", cmd_set_xp)
-concommand.Add( "wcg_get_xp", cmd_get_xp)
-concommand.Add( "wcg_spawn", cmd_spawn_prison_guard)
+concommand.Add("wcg_changerace", cmd_changerace)
+concommand.Add("wcg_set_xp", cmd_set_xp)
+concommand.Add("wcg_get_xp", cmd_get_xp)
+concommand.Add("wcg_gain_xp", cmd_gain_xp)
+concommand.Add("wcg_spawn", cmd_spawn_prison_guard)
 
 GM.PlayerSpawnTime = {}
 

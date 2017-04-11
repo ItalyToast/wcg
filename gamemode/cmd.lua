@@ -2,8 +2,9 @@
 function cmd_set_xp(player, cmd, args, argStr)
 	local amount = tonumber(argStr)
 	if(amount != nil) then
-		player:SetXP(amount)
+		player.xp = amount
 		db_set_xp(player, amount)
+		player:SendRaceInfo()
 		print( "set xp: " .. amount)
 	else
 		print("Bad argument: " + argStr)
@@ -14,6 +15,16 @@ end
 -----------------------------------------------------------
 function cmd_get_xp(player, cmd, args, argStr)
 	print(db_get_xp(player))
+end
+
+-----------------------------------------------------------
+function cmd_gain_xp(player, cmd, args, argStr)
+	local amount = tonumber(argStr)
+	if(amount != nil) then
+		player_manager.RunClass( player, "GainXP", amount)
+	else
+		print("Bad argument: " + argStr)
+	end
 end
 
 -----------------------------------------------------------
