@@ -56,6 +56,12 @@ function PLAYER:Loadout()
 
 	self.Player:Give( "weapon_pistol" )
 	self.Player:GiveAmmo( 255, "Pistol", true )
+	
+	self.Player:Give( "weapon_shotgun" )
+	
+	self.Player:Give( "weapon_crowbar" )
+	
+	self.Player:Give( "weapon_crossbow" )
 
 end
 

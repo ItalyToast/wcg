@@ -1,18 +1,3 @@
-
-function set_xp_console(player, cmd, args, argStr)
-	print("setxp")
-	print(argStr)
-	local amount = tonumber(argStr)
-	if(amount != nil) then
-		db_set_xp(player, amount)
-		print( "set xp: " .. amount)
-	end
-end
-
-function get_xp_console(player, cmd, args, argStr)
-	print(db_get_xp(player))
-end
-
 --Database Function
 
 function db_set_xp(player, xp, classid)
