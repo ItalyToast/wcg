@@ -223,7 +223,7 @@ function GM:PlayerSpawn( pl )
 	net.Send(pl)
 	
 	-- Set PASSIVE skills
-	player_manager.RunClass( pl, "SetPassives", 0)
+	player_manager.RunClass( pl, "SetPassives", 1)
 
 	-- Call item loadout function
 	hook.Call( "PlayerLoadout", GAMEMODE, pl )
@@ -460,7 +460,9 @@ end
 		 Return true to not take damage
 -----------------------------------------------------------]]
 function GM:ScalePlayerDamage( ply, hitgroup, dmginfo )
-
+	
+	local oldinfo = dmginfo
+	
 	-- More damage if we're shot in the head
 	if ( hitgroup == HITGROUP_HEAD ) then
 	
@@ -478,6 +480,8 @@ function GM:ScalePlayerDamage( ply, hitgroup, dmginfo )
 		dmginfo:ScaleDamage( 0.25 )
 	
 	end
+	
+	print("Damage scaled from "..oldinfo.." to "..dmginfo)
 
 end
 
@@ -510,7 +514,7 @@ end
 	Desc: Player typed KILL in the console. Can they kill themselves?
 -----------------------------------------------------------]]
 function GM:CanPlayerSuicide( ply )
-	return true
+	return kill
 end
 
 --[[---------------------------------------------------------
@@ -666,6 +670,7 @@ end
 -----------------------------------------------------------]]
 function GM:GetFallDamage( ply, flFallSpeed )
 
+	-- !!!Need Fix!!!
 	if( GetConVarNumber( "mp_falldamage" ) > 0 ) then -- realistic fall damage is on
 		return ( flFallSpeed - 526.5 ) * ( 100 / 396 ) -- the Source SDK value
 	end

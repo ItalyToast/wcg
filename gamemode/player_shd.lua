@@ -41,6 +41,8 @@ function GM:PlayerFootstep( ply, vPos, iFoot, strSoundName, fVolume, pFilter )
 		return true
 	end
 	
+	--!!!Need Fix!!!
+	
 	--[[
 	-- Draw effect on footdown
 	local effectdata = EffectData()

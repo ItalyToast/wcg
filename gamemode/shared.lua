@@ -36,6 +36,17 @@ end
    Desc: Player pressed a key (see IN enums)
 -----------------------------------------------------------]]
 function GM:KeyPress( player, key )
+	--!!!Need Fix!!!
+	-- Different ults should work (target player/target area)
+	
+	-- Check if cooldowned
+	
+	-- Get mTarget
+	
+	-- Cast ultimate
+	player_manager.RunClass( player, "Ultimate", {victim--, level})
+	
+	-- Set cooldown
 end
 
 --[[---------------------------------------------------------

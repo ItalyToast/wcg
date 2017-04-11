@@ -35,17 +35,23 @@ PLAYER.skills[ultimate].Values = {200, 30, 40, 50}
 
 function PLAYER:SetPassives(level)
 	-- Skill0
-	self.Player:SetWalkSpeed(400*baseclass.Get("test_class").skills[0].Values[1])
+	self.Player:SetWalkSpeed(400*baseclass.Get("test_class").skills[0].Values[level])
 	
 	-- Skill1
-	self.Player:SetHealth(100+baseclass.Get("test_class").skills[1].Values[1])
+	self.Player:SetHealth(100+baseclass.Get("test_class").skills[1].Values[level])
 	
 	-- Skill2
-	self.Player:SetJumpPower(200*baseclass.Get("test_class").skills[2].Values[1])
+	self.Player:SetJumpPower(200*baseclass.Get("test_class").skills[2].Values[level])
 end
 
-function PLAYER:Ultimate(client, victim)
-	victim.TakeDamage(PLAYER.skills[ultimate].Values[level], client, client)
+function PLAYER:Ultimate(level)
+	
+	local victim = Player:GetEyeTrace().Entity
+	print("Victim: "..victim)
+	
+	if(victim:GetCreationID() != 0)
+		victim.TakeDamage(baseclass.Get("test_class").skills[ultimate].Values[level], self.Player, self.Player)
+	end
 end
 
 player_manager.RegisterClass( "test_class", PLAYER, "base" )
