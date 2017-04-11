@@ -77,7 +77,7 @@ end
 function RacePicker.ChangeRaceTo(race)
 
 	net.Start( "WCG_ChangeRace" )
-	net.WriteString( "player_default" )
+	net.WriteString( "test_class" )
 	net.SendToServer()
 
 end

@@ -130,4 +130,4 @@ end
 function PLAYER:Ultimate(client, victim)
 end
 
-player_manager.RegisterClass( "player_default", PLAYER, nil )
+player_manager.RegisterClass( "base", PLAYER, nil )

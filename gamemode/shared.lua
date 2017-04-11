@@ -9,8 +9,13 @@
 
 -----------------------------------------------------------]]
 
-include("player_class/test_class.lua")
+-- Base Race
 include("player_class/base.lua")
+
+-- Races
+include("player_class/test_class.lua")
+-- I'm A Race!!!
+
 include("player_shd.lua")
 
 GM.Name = "WCG"
