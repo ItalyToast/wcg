@@ -1,3 +1,4 @@
+-----------------------------------------------------------
 function cmd_set_xp(player, cmd, args, argStr)
 	local amount = tonumber(argStr)
 	if(amount != nil) then
@@ -9,10 +10,13 @@ function cmd_set_xp(player, cmd, args, argStr)
 	end
 end
 
+
+-----------------------------------------------------------
 function cmd_get_xp(player, cmd, args, argStr)
 	print(db_get_xp(player))
 end
 
+-----------------------------------------------------------
 function cmd_spawn_prison_guard(player, cmd, args, argStr)
 	local npc = ents.Create( "npc_combine_s" )
 	if ( !IsValid( npc ) ) then return end // Check whether we successfully made an entity, if not - bail
@@ -20,6 +24,7 @@ function cmd_spawn_prison_guard(player, cmd, args, argStr)
 	npc:Spawn()
 end
 
+-----------------------------------------------------------
 function cmd_changerace(player, cmd, args, argStr)
 	if ( IsValid( player ) and player:IsPlayer() ) then
 		player_manager.SetPlayerClass(player, args[1])
