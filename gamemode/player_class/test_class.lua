@@ -3,7 +3,7 @@ AddCSLuaFile()
 local PLAYER = {}
 
 PLAYER.DisplayName = "Test Class"
-PLAYER.WalkSpeed = 1000
+PLAYER.WalkSpeed = 100
 
 PLAYER.skills = {}
 local ultimate = 3
@@ -35,19 +35,17 @@ PLAYER.skills[ultimate].Values = {200, 30, 40, 50}
 
 function PLAYER:SetPassives(level)
 	-- Skill0
-	PLAYER.WalkSpeed = 400*PLAYER.skills[0].Values[level]
+	self.Player:SetWalkSpeed(400*baseclass.Get("test_class").skills[0].Values[1])
 	
 	-- Skill1
-	PLAYER.MaxHealth = 100+PLAYER.skills[1].Values[level]
-	PLAYER.StartHealth = 100+PLAYER.skills[1].Values[level]
+	self.Player:SetHealth(100+baseclass.Get("test_class").skills[1].Values[1])
 	
 	-- Skill2
-	PLAYER.MaxHealth = 200*PLAYER.skills[2].Values[level]
-	PLAYER.StartHealth = 200*PLAYER.skills[2].Values[level]
+	self.Player:SetJumpPower(200*baseclass.Get("test_class").skills[2].Values[1])
 end
 
 function PLAYER:Ultimate(client, victim)
 	victim.TakeDamage(PLAYER.skills[ultimate].Values[level], client, client)
 end
 
-player_manager.RegisterClass( "test_class", PLAYER, "player_default" )
+player_manager.RegisterClass( "test_class", PLAYER, "base" )

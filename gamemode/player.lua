@@ -223,7 +223,7 @@ function GM:PlayerSpawn( pl )
 	net.Send(pl)
 	
 	-- Set PASSIVE skills
-	--player_manager.RunClass( pl, "SetPassives", 0)
+	player_manager.RunClass( pl, "SetPassives", 0)
 
 	-- Call item loadout function
 	hook.Call( "PlayerLoadout", GAMEMODE, pl )
