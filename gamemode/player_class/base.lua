@@ -4,7 +4,7 @@ local PLAYER = {}
 
 PLAYER.DisplayName			= "Default Class"
 
-PLAYER.WalkSpeed			= 2000		-- How fast to move when not running
+PLAYER.WalkSpeed			= 400		-- How fast to move when not running
 PLAYER.RunSpeed				= 600		-- How fast to move when running
 PLAYER.CrouchedWalkSpeed	= 0.3		-- Multiply move speed by this when crouching
 PLAYER.DuckSpeed			= 0.3		-- How fast to go from not ducking, to ducking
@@ -122,6 +122,12 @@ function PLAYER:GetHandsModel()
 	local playermodel = player_manager.TranslateToPlayerModelName( self.Player:GetModel() )
 	return player_manager.TranslatePlayerHands( playermodel )
 
+end
+
+function PLAYER:SetPassives(level)
+end
+
+function PLAYER:Ultimate(client, victim)
 end
 
 player_manager.RegisterClass( "player_default", PLAYER, nil )

@@ -43,7 +43,7 @@ function RacePicker:ShowRace(player)
 				RunConsoleCommand( "say", "You are now: " .. race["name"] )
 				-- Change race
 				net.Start( "WCG_ChangeRace" )
-				net.WriteString( "player_default" )
+				net.WriteString( "test_class" )
 				net.SendToServer()
 			end
 			Race:SetPos( 60, y )
