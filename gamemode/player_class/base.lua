@@ -19,6 +19,12 @@ PLAYER.TeammateNoCollide	= true		-- Do we collide with teammates or run straight
 PLAYER.AvoidPlayers			= true		-- Automatically swerves around other players
 PLAYER.UseVMHands			= true		-- Uses viewmodel hands
 
+--WCG Variables
+PLAYER.xp					= 0
+PLAYER.xp_max				= 0
+PLAYER.level				= 0
+
+
 --
 -- Name: PLAYER:SetupDataTables
 -- Desc: Set up the network table accessors

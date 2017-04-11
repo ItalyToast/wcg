@@ -15,9 +15,9 @@ function RacePicker:ShowRace(player)
 	self.RaceSelectFrame = vgui.Create( "DFrame" )
 	self.RaceSelectFrame:SetTitle( "Pick Race" )
 	
-	local Undead = { id = 0, name = "Undead", icon = "materials/icon16/arrow_in.png" }
-	local Human = { id = 1, name = "Human", icon = "materials/icon16/basket.png" }
-	local Orc = { id = 2, name = "Human", icon = "materials/icon16/bell.png" }
+	local Undead = { id = 0, name = "base", icon = "materials/icon16/arrow_in.png" }
+	local Human = { id = 1, name = "test_class", icon = "materials/icon16/basket.png" }
+	local Orc = { id = 2, name = "test_class", icon = "materials/icon16/bell.png" }
 	
 	local AllRaces = { Undead, Human, Orc}
 	
@@ -76,8 +76,6 @@ end
 
 function RacePicker.ChangeRaceTo(race)
 
-	net.Start( "WCG_ChangeRace" )
-	net.WriteString( "test_class" )
-	net.SendToServer()
+	RunConsoleCommand("wcg_changerace", race.name)
 
 end

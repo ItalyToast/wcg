@@ -3,6 +3,7 @@
 	Desc: Player's STEAMID has been authed
 -----------------------------------------------------------]]
 function GM:PlayerAuthed( ply, SteamID, UniqueID )
+	ply:SetClassID(db_get_race(ply))
 end
 
 --[[---------------------------------------------------------
