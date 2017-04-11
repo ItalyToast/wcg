@@ -514,7 +514,7 @@ end
 	Desc: Player typed KILL in the console. Can they kill themselves?
 -----------------------------------------------------------]]
 function GM:CanPlayerSuicide( ply )
-	return kill
+	return true
 end
 
 --[[---------------------------------------------------------

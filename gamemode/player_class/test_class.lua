@@ -46,12 +46,22 @@ end
 
 function PLAYER:Ultimate(level)
 	
-	local victim = Player:GetEyeTrace().Entity
-	print("Victim: "..victim)
+	local target = self.Player:GetEyeTrace()
 	
-	if(victim:GetCreationID() != 0)
-		victim.TakeDamage(baseclass.Get("test_class").skills[ultimate].Values[level], self.Player, self.Player)
+	local ultimate_used = false
+	
+	if(target.HitWorld == false) then
+		
+		local victim = target.Entity
+
+		-- Debug
+		print(victim)
+		
+		victim:TakeDamage(baseclass.Get("test_class").skills[ultimate].Values[level], self.Player, self.Player)
+		ultimate_used = true
 	end
+	
+	return ultimate_used
 end
 
 player_manager.RegisterClass( "test_class", PLAYER, "base" )
