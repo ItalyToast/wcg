@@ -1,13 +1,22 @@
+--Client Side LUA files
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
 AddCSLuaFile("cl_scoreboard.lua")
 AddCSLuaFile("cl_pickteam.lua")
 AddCSLuaFile("cl_pickrace.lua")
 AddCSLuaFile("cl_xpbar.lua")
+AddCSLuaFile("vgui/progressbar.lua")
 
+--Shared files
 include("shared.lua")
 
+--Server Files
+include("level.lua")
 include("player.lua")
+
+--Network Strings
+util.AddNetworkString("WCG_RaceState")
+util.AddNetworkString("WCG_ChangeRace")
 
 GM.PlayerSpawnTime = {}
 
@@ -17,13 +26,17 @@ GM.PlayerSpawnTime = {}
 -----------------------------------------------------------]]
 function GM:Initialize()
 	
-	util.AddNetworkString( "WCG_ChangeRace" )
+	concommand.Add( "wcg_set_xp", set_xp_console)
+	concommand.Add( "wcg_get_xp", get_xp_console)
+
 	net.Receive( "WCG_ChangeRace", function( len, pl )
 		if ( IsValid( pl ) and pl:IsPlayer() ) then
-			player_manager.SetPlayerClass(pl, net.ReadString())
+			local class = net.ReadString()
+			print("New Race " .. class)
+			player_manager.SetPlayerClass(pl, class)
 		end
 	end )
-	
+
 end
 
 --[[---------------------------------------------------------

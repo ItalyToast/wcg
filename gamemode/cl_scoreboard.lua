@@ -19,6 +19,7 @@ surface.CreateFont( "ScoreboardDefaultTitle", {
 local PLAYER_LINE = {
 	Init = function( self )
 
+		print("Create player line")
 		self.AvatarButton = self:Add( "DButton" )
 		self.AvatarButton:Dock( LEFT )
 		self.AvatarButton:SetSize( 32, 32 )
@@ -27,6 +28,11 @@ local PLAYER_LINE = {
 		self.Avatar = vgui.Create( "AvatarImage", self.AvatarButton )
 		self.Avatar:SetSize( 32, 32 )
 		self.Avatar:SetMouseInputEnabled( false )
+		
+		self.RaceIcon = self:Add( "DImage" )
+		self.RaceIcon:Dock( LEFT )
+		self.RaceIcon:SetSize( 32, 32 )
+		self.RaceIcon:SetImage( "materials/icon16/arrow_in.png" )
 
 		self.Name = self:Add( "DLabel" )
 		self.Name:Dock( FILL )
@@ -71,6 +77,14 @@ local PLAYER_LINE = {
 		self.Player = pl
 
 		self.Avatar:SetPlayer( pl )
+		
+		local class = pl:GetClassID();
+		local classImage = "materials/icon16/arrow_in.png"
+		if(class == 0) then classImage = "materials/icon16/arrow_in.png" end
+		if(class == 1) then classImage = "materials/icon16/basket.png" end
+		if(class == 2) then classImage = "materials/icon16/bell.png" end
+		
+		self.RaceIcon:SetImage(classImage)
 
 		self:Think( self )
 
