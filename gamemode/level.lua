@@ -45,13 +45,3 @@ end
 function db_get_race(player)
 	return player:GetPData("selected_class") or nil
 end
-
---Networking
-function net_WCG_ChangeRace(len, player)
-	local class = net.ReadInt(32)
-	
-	player.Setclass(class)
-	db_set_race(class);
-end
-
-net.Receive("WCG_ChangeRace", net_WCG_ChangeRace)

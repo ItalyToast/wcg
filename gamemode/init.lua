@@ -17,7 +17,6 @@ include("cmd.lua")
 
 --Network Strings
 util.AddNetworkString("WCG_RaceState")
-util.AddNetworkString("WCG_ChangeRace")
 
 --Console commands
 concommand.Add("wcg_changerace", cmd_changerace)
@@ -34,14 +33,6 @@ GM.PlayerSpawnTime = {}
    Desc: Called immediately after starting the gamemode
 -----------------------------------------------------------]]
 function GM:Initialize()
-
-	net.Receive( "WCG_ChangeRace", function( len, pl )
-		if ( IsValid( pl ) and pl:IsPlayer() ) then
-			local class = net.ReadString()
-			print("New Race " .. class)
-			player_manager.SetPlayerClass(pl, class)
-		end
-	end )
 
 end
 
