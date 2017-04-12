@@ -2,8 +2,9 @@ AddCSLuaFile()
 
 local PLAYER = {}
 
-PLAYER.DisplayName = "Test Class"
-PLAYER.WalkSpeed = 100
+PLAYER.DisplayName 			= "Test Class"
+PLAYER.WalkSpeed 			= 100
+PLAYER.icon 				= "materials/icon16/basket.png"
 
 PLAYER.skills = {}
 local ultimate = 3
@@ -48,4 +49,4 @@ function PLAYER:Ultimate(client, victim)
 	victim.TakeDamage(PLAYER.skills[ultimate].Values[level], client, client)
 end
 
-player_manager.RegisterClass( "test_class", PLAYER, "base" )
+CreateRace( "test_class", PLAYER, "base" )

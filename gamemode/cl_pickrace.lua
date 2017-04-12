@@ -15,12 +15,6 @@ function RacePicker:ShowRace(player)
 	self.RaceSelectFrame = vgui.Create( "DFrame" )
 	self.RaceSelectFrame:SetTitle( "Pick Race" )
 	
-	local Undead = { id = 0, name = "base", icon = "materials/icon16/arrow_in.png" }
-	local Human = { id = 1, name = "test_class", icon = "materials/icon16/basket.png" }
-	local Orc = { id = 2, name = "test_class", icon = "materials/icon16/bell.png" }
-	
-	local AllRaces = { Undead, Human, Orc}
-	
 	local y = 30
 	for i, race in pairs(AllRaces) do
 	

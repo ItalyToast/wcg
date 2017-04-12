@@ -20,6 +20,7 @@ PLAYER.AvoidPlayers			= true		-- Automatically swerves around other players
 PLAYER.UseVMHands			= true		-- Uses viewmodel hands
 
 --WCG Variables
+PLAYER.icon 				= "materials/icon16/arrow_in.png"
 PLAYER.xp					= 0
 PLAYER.xp_max				= 0
 PLAYER.level				= 0
@@ -178,4 +179,4 @@ end
 function PLAYER:Ultimate(client, victim)
 end
 
-player_manager.RegisterClass( "base", PLAYER, nil )
+CreateRace( "base", PLAYER, nil )
