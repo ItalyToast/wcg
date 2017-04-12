@@ -10,6 +10,7 @@
 -----------------------------------------------------------]]
 
 -- Base Race
+include("player_class/class_list.lua")
 include("player_class/base.lua")
 
 -- Races

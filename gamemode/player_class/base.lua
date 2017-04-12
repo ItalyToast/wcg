@@ -19,6 +19,13 @@ PLAYER.TeammateNoCollide	= true		-- Do we collide with teammates or run straight
 PLAYER.AvoidPlayers			= true		-- Automatically swerves around other players
 PLAYER.UseVMHands			= true		-- Uses viewmodel hands
 
+--WCG Variables
+PLAYER.icon 				= "materials/icon16/arrow_in.png"
+PLAYER.xp					= 0
+PLAYER.xp_max				= 0
+PLAYER.level				= 0
+
+
 --
 -- Name: PLAYER:SetupDataTables
 -- Desc: Set up the network table accessors
@@ -44,6 +51,11 @@ end
 -- Ret1:
 --
 function PLAYER:Spawn()
+
+	self.xp = db_get_xp(self.Player)
+	self.level = db_get_level(self.Player)
+	self.xp_max = self.level * 1000 + 1000
+
 end
 
 --
@@ -130,10 +142,41 @@ function PLAYER:GetHandsModel()
 
 end
 
+function PLAYER:GainXP(xp)
+
+	self.xp = self.xp + xp
+	while (self.xp >= self.xp_max) do
+		self.xp = self.xp - self.xp_max
+		self.xp_max = self.xp_max + 1000
+		self.level = self.level + 1
+		self:LevelUp()
+	end
+	
+	db_set_xp(self.Player, self.xp)
+	db_set_level(self.Player, self.level)
+	self:SendRaceInfo()
+	print("GainXP: " .. xp)
+	print("xp " .. self.xp .. "/" .. self.xp_max)
+	print("level: " .. self.level)
+	
+end
+
+function PLAYER:LevelUp()
+	print("Level up to: " .. self.level)
+end
+
+function PLAYER:SendRaceInfo()
+	net.Start("WCG_RaceState")
+	net.WriteInt(self.xp, 32)
+	net.WriteInt(self.xp_max, 32)
+	net.WriteInt(self.level, 32)
+	net.Send(self.Player)
+end
+
 function PLAYER:SetPassives(level)
 end
 
 function PLAYER:Ultimate(client, victim)
 end
 
-player_manager.RegisterClass( "base", PLAYER, nil )
+CreateRace( "base", PLAYER, nil )

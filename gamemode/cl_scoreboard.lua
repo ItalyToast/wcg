@@ -78,14 +78,6 @@ local PLAYER_LINE = {
 
 		self.Avatar:SetPlayer( pl )
 		
-		local class = pl:GetClassID();
-		local classImage = "materials/icon16/arrow_in.png"
-		if(class == 0) then classImage = "materials/icon16/arrow_in.png" end
-		if(class == 1) then classImage = "materials/icon16/basket.png" end
-		if(class == 2) then classImage = "materials/icon16/bell.png" end
-		
-		self.RaceIcon:SetImage(classImage)
-
 		self:Think( self )
 
 		--local friend = self.Player:GetFriendStatus()
@@ -103,6 +95,7 @@ local PLAYER_LINE = {
 
 		if ( self.PName == nil || self.PName != self.Player:Nick() ) then
 			self.PName = self.Player:Nick()
+			
 			self.Name:SetText( self.PName )
 		end
 		
@@ -152,6 +145,17 @@ local PLAYER_LINE = {
 		--
 		self:SetZPos( ( self.NumKills * -50 ) + self.NumDeaths + self.Player:EntIndex() )
 
+		--
+		--setting Player Class Icon
+		--
+		local class = player_manager.GetPlayerClass(self.Player)
+		local classImage = "materials/icon16/arrow_in.png"
+		if(class == "base") then classImage = "materials/icon16/arrow_in.png" end
+		if(class == "test_class") then classImage = "materials/icon16/basket.png" end
+		if(class == 2) then classImage = "materials/icon16/bell.png" end
+		
+		self.RaceIcon:SetImage(classImage)
+		
 	end,
 
 	Paint = function( self, w, h )
