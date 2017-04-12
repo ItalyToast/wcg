@@ -143,8 +143,7 @@ function GM:PlayerDeath( ply, inflictor, attacker )
 		
 		MsgAll( attacker:Nick() .. " killed " .. ply:Nick() .. " using " .. inflictor:GetClass() .. "\n" )
 		
-		PrintTable(GetConVar("wcg_xp_per_kill"))
-		attacker:GainXP(GetConVar("wcg_xp_per_kill"):GetInt())
+		attacker:GainXP(100)
 		return 
 	end
 	
@@ -167,7 +166,7 @@ end
 function GM:OnNPCKilled(npc, attacker, inflictor )
 	if(attacker:IsPlayer())then
 		
-		player_manager.RunClass( attacker, "GainXP", GetConVar("wcg_xp_per_kill"):GetInt())
+		player_manager.RunClass( attacker, "GainXP", 100)
 	
 	end
 end
