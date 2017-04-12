@@ -1,10 +1,12 @@
 --Client Side LUA files
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
+AddCSLuaFile("player_shd.lua")
 AddCSLuaFile("cl_scoreboard.lua")
 AddCSLuaFile("cl_pickteam.lua")
 AddCSLuaFile("cl_pickrace.lua")
 AddCSLuaFile("cl_xpbar.lua")
+AddCSLuaFile("player_class/class_list.lua")
 AddCSLuaFile("vgui/progressbar.lua")
 
 --Shared files
@@ -27,6 +29,9 @@ concommand.Add("wcg_gain_xp", cmd_gain_xp)
 concommand.Add("wcg_spawn", cmd_spawn_prison_guard)
 
 --Console Variables
+CreateConVar("wcg_xp_per_kill", "100")
+CreateConVar("wcg_deathmatch", "0")
+
 GM.PlayerSpawnTime = {}
 
 --[[---------------------------------------------------------
