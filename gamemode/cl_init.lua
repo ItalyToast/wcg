@@ -19,7 +19,7 @@ include("cl_xpbar.lua")
 function GM:Initialize()
 
 	GAMEMODE.ShowScoreboard = true
-
+	
 end
 
 --[[---------------------------------------------------------
@@ -34,6 +34,7 @@ end
 	Desc: Called every frame
 -----------------------------------------------------------]]
 function GM:Think()
+	
 end
 
 --[[---------------------------------------------------------
@@ -42,6 +43,14 @@ end
 -----------------------------------------------------------]]
 function GM:PlayerBindPress( pl, bind, down )
 
+	if ( bind == "+use" and down) then
+		
+		net.Start("WCG_Ultimate")
+		net.SendToServer()
+		
+		return true
+	end
+	
 	return false
 
 end

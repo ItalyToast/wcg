@@ -71,5 +71,6 @@ end
 function RacePicker.ChangeRaceTo(race)
 
 	RunConsoleCommand("wcg_changerace", race.name)
+	
 
 end

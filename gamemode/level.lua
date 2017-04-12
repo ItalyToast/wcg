@@ -6,7 +6,7 @@ function db_set_xp(player, xp, class)
 	if(isnumber(xp)) then
 		player:SetPData("class_" .. class .. "_xp", xp)
 	else
-		throw("not a number: xp")
+		print("db_set_xp: 'xp' is not a number")
 	end
 end
 
@@ -22,7 +22,7 @@ function db_set_level(player, level, class)
 	if(isnumber(level)) then
 		player:SetPData("class_" .. class .. "_level", level)
 	else
-		throw("not a number: level")
+		print("db_set_level: 'level' is not a number")
 	end
 end
 
@@ -38,10 +38,11 @@ function db_set_race(player, class)
 	if(isstring(class)) then
 		player:SetPData("selected_class", class)
 	else
-		throw("not a number: class")
+		print("db_set_race: 'class' is not a class")
 	end
 end
 
 function db_get_race(player)
 	return player:GetPData("selected_class") or nil
 end
+
