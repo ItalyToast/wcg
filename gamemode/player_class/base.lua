@@ -25,6 +25,8 @@ PLAYER.xp					= 0
 PLAYER.xp_max				= 0
 PLAYER.level				= 0
 
+PLAYER.ultimate_cd 			= 0
+PLAYER.ultimate_cd_time 	= 10
 
 --
 -- Name: PLAYER:SetupDataTables
@@ -55,6 +57,8 @@ function PLAYER:Spawn()
 	self.xp = db_get_xp(self.Player)
 	self.level = db_get_level(self.Player)
 	self.xp_max = self.level * 1000 + 1000
+	
+	self.ultimate_cd = 0
 
 end
 
@@ -148,12 +152,11 @@ function PLAYER:GainXP(xp)
 	while (self.xp >= self.xp_max) do
 		self.xp = self.xp - self.xp_max
 		self.xp_max = self.xp_max + 1000
-		self.level = self.level + 1
 		self:LevelUp()
 	end
 	
 	db_set_xp(self.Player, self.xp)
-	db_set_level(self.Player, self.level)
+	db_set_level(self.Player, self.level, player_manager.GetPlayerClass(self.Player))
 	self:SendRaceInfo()
 	print("GainXP: " .. xp)
 	print("xp " .. self.xp .. "/" .. self.xp_max)
@@ -162,6 +165,7 @@ function PLAYER:GainXP(xp)
 end
 
 function PLAYER:LevelUp()
+	self.level = self.level + 1
 	print("Level up to: " .. self.level)
 end
 

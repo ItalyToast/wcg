@@ -186,7 +186,8 @@ function GM:PlayerInitialSpawn( player )
 	local classID = db_get_race(player)
 	if(classID != nil) then
 		player_manager.SetPlayerClass(player, classID)
-		
+	else
+		player_manager.SetPlayerClass(player, "base")
 	end
 end
 

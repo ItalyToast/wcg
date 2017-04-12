@@ -19,6 +19,9 @@ include("cmd.lua")
 util.AddNetworkString("WCG_RaceState")
 util.AddNetworkString("WCG_ChangeRace")
 
+--[Skill Effects]
+util.AddNetworkString("WCG_DamageEntity")
+
 --Console commands
 concommand.Add("wcg_changerace", cmd_changerace)
 concommand.Add("wcg_set_xp", cmd_set_xp)
@@ -34,15 +37,13 @@ GM.PlayerSpawnTime = {}
    Desc: Called immediately after starting the gamemode
 -----------------------------------------------------------]]
 function GM:Initialize()
-
-	net.Receive( "WCG_ChangeRace", function( len, pl )
+	net.Receive( "WCG_DamageEntity", function( len, pl )
 		if ( IsValid( pl ) and pl:IsPlayer() ) then
-			local class = net.ReadString()
-			print("New Race " .. class)
-			player_manager.SetPlayerClass(pl, class)
+			local victimEntityIndex = net.ReadInt(8)
+			local damage = net.ReadInt(16)
+			Entity(victimEntityIndex):TakeDamage(damage, self.Player, self.Player)
 		end
 	end )
-
 end
 
 --[[---------------------------------------------------------
