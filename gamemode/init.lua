@@ -13,11 +13,20 @@ include("shared.lua")
 --Server Files
 include("level.lua")
 include("player.lua")
+include("cmd.lua")
 
 --Network Strings
 util.AddNetworkString("WCG_RaceState")
 util.AddNetworkString("WCG_ChangeRace")
 
+--Console commands
+concommand.Add("wcg_changerace", cmd_changerace)
+concommand.Add("wcg_set_xp", cmd_set_xp)
+concommand.Add("wcg_get_xp", cmd_get_xp)
+concommand.Add("wcg_gain_xp", cmd_gain_xp)
+concommand.Add("wcg_spawn", cmd_spawn_prison_guard)
+
+--Console Variables
 GM.PlayerSpawnTime = {}
 
 --[[---------------------------------------------------------
@@ -25,9 +34,6 @@ GM.PlayerSpawnTime = {}
    Desc: Called immediately after starting the gamemode
 -----------------------------------------------------------]]
 function GM:Initialize()
-	
-	concommand.Add( "wcg_set_xp", set_xp_console)
-	concommand.Add( "wcg_get_xp", get_xp_console)
 
 	net.Receive( "WCG_ChangeRace", function( len, pl )
 		if ( IsValid( pl ) and pl:IsPlayer() ) then

@@ -128,7 +128,8 @@ function GM:PlayerDeath( ply, inflictor, attacker )
 		
 		MsgAll( attacker:Nick() .. " suicided!\n" )
 		
-	return end
+		return 
+	end
 
 	if ( attacker:IsPlayer() ) then
 	
@@ -142,7 +143,9 @@ function GM:PlayerDeath( ply, inflictor, attacker )
 		
 		MsgAll( attacker:Nick() .. " killed " .. ply:Nick() .. " using " .. inflictor:GetClass() .. "\n" )
 		
-	return end
+		attacker:GainXP(100)
+		return 
+	end
 	
 	net.Start( "PlayerKilled" )
 	
@@ -157,17 +160,34 @@ function GM:PlayerDeath( ply, inflictor, attacker )
 end
 
 --[[---------------------------------------------------------
+	Name: gamemode:OnNPCKilled( )
+	Desc: Called when a NPC dies.
+-----------------------------------------------------------]]
+function GM:OnNPCKilled(npc, attacker, inflictor )
+	if(attacker:IsPlayer())then
+		
+		player_manager.RunClass( attacker, "GainXP", 100)
+	
+	end
+end
+
+--[[---------------------------------------------------------
 	Name: gamemode:PlayerInitialSpawn( )
 	Desc: Called just before the player's first spawn
 -----------------------------------------------------------]]
-function GM:PlayerInitialSpawn( pl )
+function GM:PlayerInitialSpawn( player )
 
-	pl:SetTeam( TEAM_UNASSIGNED )
+	player:SetTeam( TEAM_UNASSIGNED )
 	
 	if ( GAMEMODE.TeamBased ) then
-		pl:ConCommand( "gm_showteam" )
+		player:ConCommand( "gm_showteam" )
 	end
-
+	
+	local classID = db_get_race(player)
+	if(classID != nil) then
+		player_manager.SetPlayerClass(player, classID)
+		
+	end
 end
 
 --[[---------------------------------------------------------
@@ -214,16 +234,10 @@ function GM:PlayerSpawn( pl )
 
 	player_manager.OnPlayerSpawn( pl )
 	player_manager.RunClass( pl, "Spawn" )
-	
-
-	net.Start("WCG_RaceState")
-	net.WriteInt(db_get_xp(pl), 32)
-	net.WriteInt(1000, 32)
-	net.WriteInt(db_get_level(pl), 32)
-	net.Send(pl)
+	player_manager.RunClass( pl, "SendRaceInfo" )
 	
 	-- Set PASSIVE skills
-	--player_manager.RunClass( pl, "SetPassives", 0)
+	player_manager.RunClass( pl, "SetPassives", 0)
 
 	-- Call item loadout function
 	hook.Call( "PlayerLoadout", GAMEMODE, pl )

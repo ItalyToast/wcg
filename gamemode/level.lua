@@ -1,72 +1,57 @@
-
-function set_xp_console(player, cmd, args, argStr)
-	print("setxp")
-	print(argStr)
-	local amount = tonumber(argStr)
-	if(amount != nil) then
-		db_set_xp(player, amount)
-		print( "set xp: " .. amount)
-	end
-end
-
-function get_xp_console(player, cmd, args, argStr)
-	print(db_get_xp(player))
-end
-
 --Database Function
 
-function db_set_xp(player, xp, classid)
-	if(classid == nil) then classid = player:GetClassID() end
+function db_set_xp(player, xp, class)
+	if(class == nil) then class = player_manager.GetPlayerClass(player) end
 
 	if(isnumber(xp)) then
-		player:SetPData("class_" .. classid .. "_xp", xp)
+		player:SetPData("class_" .. class .. "_xp", xp)
 	else
 		throw("not a number: xp")
 	end
 end
 
-function db_get_xp(player, classid)
-	if(classid == nil) then classid = player:GetClassID() end
+function db_get_xp(player, class)
+	if(class == nil) then class = player_manager.GetPlayerClass(player) end
 	
-	return player:GetPData("class_" .. classid .. "_xp") or 0
+	return player:GetPData("class_" .. class .. "_xp") or 0
 end
 
-function db_set_level(player, level, classid)
-	if(classid == nil) then classid = player:GetClassID() end
+function db_set_level(player, level, class)
+	if(class == nil) then class = player_manager.GetPlayerClass(player) end
 
 	if(isnumber(level)) then
-		player:SetPData("class_" .. classid .. "_level", level)
+		player:SetPData("class_" .. class .. "_level", level)
 	else
 		throw("not a number: level")
 	end
 end
 
-function db_get_level(player, classid)
-	if(classid == nil) then classid = player:GetClassID() end
+function db_get_level(player, class)
+	if(class == nil) then class = player_manager.GetPlayerClass(player) end
 	
-	return player:GetPData("class_" .. classid .. "_level") or 0
+	return player:GetPData("class_" .. class .. "_level") or 0
 end
 
-function db_set_race(player, classid)
-	if(classid == nil) then classid = player:GetClassID() end
+function db_set_race(player, class)
+	if(class == nil) then class = player_manager.GetPlayerClass(player) end
 
-	if(isnumber(classid)) then
-		player:SetPData("selected_class", classid)
+	if(isstring(class)) then
+		player:SetPData("selected_class", class)
 	else
-		throw("not a number: classid")
+		throw("not a number: class")
 	end
 end
 
 function db_get_race(player)
-	return player:GetPData("selected_class") or -1
+	return player:GetPData("selected_class") or nil
 end
 
 --Networking
 function net_WCG_ChangeRace(len, player)
-	local classID = net.ReadInt(32)
+	local class = net.ReadInt(32)
 	
-	player.SetClassID(classID)
-	db_set_race(classID);
+	player.Setclass(class)
+	db_set_race(class);
 end
 
 net.Receive("WCG_ChangeRace", net_WCG_ChangeRace)

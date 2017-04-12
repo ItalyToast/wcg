@@ -34,6 +34,11 @@ end
 	Desc: Called every frame
 -----------------------------------------------------------]]
 function GM:Think()
+	local player = LocalPlayer()
+	if(IsValid(player) and player.GetXP != nil) then
+		local xp = player:GetXP()
+		XPBar.SetXP(XPBar, xp, 1000)
+	end
 end
 
 --[[---------------------------------------------------------

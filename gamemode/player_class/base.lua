@@ -4,7 +4,7 @@ local PLAYER = {}
 
 PLAYER.DisplayName			= "Default Class"
 
-PLAYER.WalkSpeed			= 2000		-- How fast to move when not running
+PLAYER.WalkSpeed			= 400		-- How fast to move when not running
 PLAYER.RunSpeed				= 600		-- How fast to move when running
 PLAYER.CrouchedWalkSpeed	= 0.3		-- Multiply move speed by this when crouching
 PLAYER.DuckSpeed			= 0.3		-- How fast to go from not ducking, to ducking
@@ -18,6 +18,13 @@ PLAYER.DropWeaponOnDie		= false		-- Do we drop our weapon when we die
 PLAYER.TeammateNoCollide	= true		-- Do we collide with teammates or run straight through them
 PLAYER.AvoidPlayers			= true		-- Automatically swerves around other players
 PLAYER.UseVMHands			= true		-- Uses viewmodel hands
+
+--WCG Variables
+PLAYER.icon 				= "materials/icon16/arrow_in.png"
+PLAYER.xp					= 0
+PLAYER.xp_max				= 0
+PLAYER.level				= 0
+
 
 --
 -- Name: PLAYER:SetupDataTables
@@ -44,6 +51,11 @@ end
 -- Ret1:
 --
 function PLAYER:Spawn()
+
+	self.xp = db_get_xp(self.Player)
+	self.level = db_get_level(self.Player)
+	self.xp_max = self.level * 1000 + 1000
+
 end
 
 --
@@ -56,6 +68,12 @@ function PLAYER:Loadout()
 
 	self.Player:Give( "weapon_pistol" )
 	self.Player:GiveAmmo( 255, "Pistol", true )
+	
+	self.Player:Give( "weapon_shotgun" )
+	
+	self.Player:Give( "weapon_crowbar" )
+	
+	self.Player:Give( "weapon_crossbow" )
 
 end
 
@@ -124,4 +142,41 @@ function PLAYER:GetHandsModel()
 
 end
 
-player_manager.RegisterClass( "player_default", PLAYER, nil )
+function PLAYER:GainXP(xp)
+
+	self.xp = self.xp + xp
+	while (self.xp >= self.xp_max) do
+		self.xp = self.xp - self.xp_max
+		self.xp_max = self.xp_max + 1000
+		self.level = self.level + 1
+		self:LevelUp()
+	end
+	
+	db_set_xp(self.Player, self.xp)
+	db_set_level(self.Player, self.level)
+	self:SendRaceInfo()
+	print("GainXP: " .. xp)
+	print("xp " .. self.xp .. "/" .. self.xp_max)
+	print("level: " .. self.level)
+	
+end
+
+function PLAYER:LevelUp()
+	print("Level up to: " .. self.level)
+end
+
+function PLAYER:SendRaceInfo()
+	net.Start("WCG_RaceState")
+	net.WriteInt(self.xp, 32)
+	net.WriteInt(self.xp_max, 32)
+	net.WriteInt(self.level, 32)
+	net.Send(self.Player)
+end
+
+function PLAYER:SetPassives(level)
+end
+
+function PLAYER:Ultimate(client, victim)
+end
+
+CreateRace( "base", PLAYER, nil )
