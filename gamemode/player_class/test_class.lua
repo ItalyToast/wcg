@@ -10,7 +10,8 @@ PLAYER.skills = {}
 
 PLAYER.ultimate = 4
 local ultimate = PLAYER.ultimate
-PLAYER.ultimate_cd_time 	= 10
+PLAYER.ultimate_cd = 10
+PLAYER.ultimate_cd_time = 10
 
 PLAYER.skills[1] = {}
 PLAYER.skills[2] = {}
@@ -69,7 +70,8 @@ function PLAYER:Ultimate(level)
 			ultimate_used = true
 			self.ultimate_cd = self.ultimate_cd_time
 		end
-	
+	else
+		player:ChatPrint("Ultimate CD: "..tostring(player.ultimate_cd))
 	end
 	
 	return ultimate_used

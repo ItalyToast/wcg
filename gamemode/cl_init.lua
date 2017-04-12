@@ -36,13 +36,9 @@ end
 -----------------------------------------------------------]]
 function GM:Think()
 	local player = LocalPlayer()
-	if(IsValid(player) and player.GetXP != nil) then
-		local xp = player:GetXP()
-		XPBar.SetXP(XPBar, xp, 1000)
-	end
 	
 	-- Decrease cooldowns
-	if(IsValid(player) and player.ultimate_cd > 0) then
+	if(IsValid(player)) then
 		local newTime = CurTime()
 		if(newTime - lastTime >= 1) then
 			player.ultimate_cd = player.ultimate_cd - 1
