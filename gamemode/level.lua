@@ -46,15 +46,3 @@ function db_get_race(player)
 	return player:GetPData("selected_class") or nil
 end
 
---Networking
-function net_WCG_ChangeRace(len, player)
-	if(IsValid(player) and player:IsPlayer()) then
-		local class = net.ReadInt(32)
-		player.SetClass(class)
-		db_set_race(class)
-		player:ChatPrint("You will be '"..class.Name.."' next time you spawn.")
-	end
-
-end
-
-net.Receive("WCG_ChangeRace", net_WCG_ChangeRace)
