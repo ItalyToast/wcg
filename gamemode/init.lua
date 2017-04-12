@@ -18,9 +18,7 @@ include("cmd.lua")
 --Network Strings
 util.AddNetworkString("WCG_RaceState")
 util.AddNetworkString("WCG_ChangeRace")
-
---[Skill Effects]
-util.AddNetworkString("WCG_DamageEntity")
+util.AddNetworkString("WCG_Ultimate")
 
 --Console commands
 concommand.Add("wcg_changerace", cmd_changerace)
@@ -37,13 +35,12 @@ GM.PlayerSpawnTime = {}
    Desc: Called immediately after starting the gamemode
 -----------------------------------------------------------]]
 function GM:Initialize()
-	net.Receive( "WCG_DamageEntity", function( len, pl )
-		if ( IsValid( pl ) and pl:IsPlayer() ) then
-			local victimEntityIndex = net.ReadInt(8)
-			local damage = net.ReadInt(16)
-			Entity(victimEntityIndex):TakeDamage(damage, self.Player, self.Player)
+	net.Receive("WCG_Ultimate", function (len, player)
+		if(IsValid(player) and player:IsPlayer()) then
+			player_manager.RunClass( player, "Ultimate", 1 )
+			print("Ultimate recieved")
 		end
-	end )
+	end)
 end
 
 --[[---------------------------------------------------------
@@ -58,6 +55,7 @@ end
    Desc: Called every frame
 -----------------------------------------------------------]]
 function GM:Think()
+
 end
 
 --[[---------------------------------------------------------

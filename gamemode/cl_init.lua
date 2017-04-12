@@ -19,7 +19,6 @@ include("cl_xpbar.lua")
 function GM:Initialize()
 
 	GAMEMODE.ShowScoreboard = true
-	lastTime = CurTime()
 	
 end
 
@@ -35,19 +34,6 @@ end
 	Desc: Called every frame
 -----------------------------------------------------------]]
 function GM:Think()
-	local player = LocalPlayer()
-	
-	-- Decrease cooldowns
-	if(IsValid(player)) then
-		local newTime = CurTime()
-		if(newTime - lastTime >= 1) then
-			player.ultimate_cd = player.ultimate_cd - 1
-		end
-		
-		lastTime = newTime
-		player:ChatPrint("Ultimate CD: "..tostring(player.ultimate_cd))
-	end
-		
 	
 end
 
@@ -56,12 +42,11 @@ end
 	Desc: A player pressed a bound key - return true to override action
 -----------------------------------------------------------]]
 function GM:PlayerBindPress( pl, bind, down )
-	
-	if(bind == IN_USE) then
+
+	if ( bind == "+use" ) then
 		
-		--!!!Need Fix!!!
-		-- Cast ultimate {1}' is player current level
-		player_manager.RunClass(player, "Ultimate", 1)
+		net.Start("WCG_Ultimate")
+		net.SendToServer()
 		
 		return true
 	end

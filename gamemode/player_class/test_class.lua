@@ -10,7 +10,7 @@ PLAYER.skills = {}
 
 PLAYER.ultimate = 4
 local ultimate = PLAYER.ultimate
-PLAYER.ultimate_cd = 10
+PLAYER.ultimate_time = 0
 PLAYER.ultimate_cd_time = 10
 
 PLAYER.skills[1] = {}
@@ -51,9 +51,10 @@ end
 
 function PLAYER:Ultimate(level)
 	
+	--[[
 	local ultimate_used = false
-	
-	if(self.ultimate_cd <= 0) then
+	local curTime = CurTime()
+	if(curTime - self.ultimate_time >= self.ultimate_cd_time) then
 	
 		local target = self.Player:GetEyeTrace()
 		
@@ -61,17 +62,29 @@ function PLAYER:Ultimate(level)
 			
 			local victim = target.Entity
 			
-			-- Send deal damage to server
-			net.Start("WCG_DamageEntity")
-			net.WriteInt(victim:EntIndex(), 8)
-			net.WriteInt(self.skills[self.ultimate].Values[level], 16)
-			net.SendToServer()
+			victim:TakeDamage(self.skills[self.ultimate].Values[level], self.Player, self.Player)
 			
 			ultimate_used = true
-			self.ultimate_cd = self.ultimate_cd_time
+			self.ultimate_time = curTime
 		end
 	else
 		player:ChatPrint("Ultimate CD: "..tostring(player.ultimate_cd))
+	end
+	
+	return ultimate_used
+	]]
+	
+	local ultimate_used = false
+	
+	local target = self.Player:GetEyeTrace()
+	
+	if(target.HitWorld == false) then
+		
+		local victim = target.Entity
+		
+		victim:TakeDamage(self.skills[self.ultimate].Values[level], self.Player, self.Player)
+		
+		ultimate_used = true
 	end
 	
 	return ultimate_used
