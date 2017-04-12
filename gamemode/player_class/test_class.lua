@@ -10,8 +10,8 @@ PLAYER.skills = {}
 
 PLAYER.ultimate = 4
 local ultimate = PLAYER.ultimate
-PLAYER.ultimate_time = 0
-PLAYER.ultimate_cd_time = 10
+PLAYER.ultimate_last_used = 0
+PLAYER.ultimate_cd = 10
 
 PLAYER.skills[1] = {}
 PLAYER.skills[2] = {}
@@ -51,11 +51,10 @@ end
 
 function PLAYER:Ultimate(level)
 	
-	--[[
 	local ultimate_used = false
 	local curTime = CurTime()
-	if(curTime - self.ultimate_time >= self.ultimate_cd_time) then
 	
+	if(curTime - self.ultimate_last_used >= self.ultimate_cd) then
 		local target = self.Player:GetEyeTrace()
 		
 		if(target.HitWorld == false) then
@@ -65,26 +64,10 @@ function PLAYER:Ultimate(level)
 			victim:TakeDamage(self.skills[self.ultimate].Values[level], self.Player, self.Player)
 			
 			ultimate_used = true
-			self.ultimate_time = curTime
+			self.ultimate_last_used = curTime
 		end
 	else
-		player:ChatPrint("Ultimate CD: "..tostring(player.ultimate_cd))
-	end
-	
-	return ultimate_used
-	]]
-	
-	local ultimate_used = false
-	
-	local target = self.Player:GetEyeTrace()
-	
-	if(target.HitWorld == false) then
-		
-		local victim = target.Entity
-		
-		victim:TakeDamage(self.skills[self.ultimate].Values[level], self.Player, self.Player)
-		
-		ultimate_used = true
+		self.Player:ChatPrint("Cooldown: "..math.floor(curTime - self.ultimate_last_used).."s/"..self.ultimate_cd..'s')
 	end
 	
 	return ultimate_used

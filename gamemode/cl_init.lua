@@ -43,7 +43,7 @@ end
 -----------------------------------------------------------]]
 function GM:PlayerBindPress( pl, bind, down )
 
-	if ( bind == "+use" ) then
+	if ( bind == "+use" and down) then
 		
 		net.Start("WCG_Ultimate")
 		net.SendToServer()

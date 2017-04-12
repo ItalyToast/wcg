@@ -38,7 +38,6 @@ function GM:Initialize()
 	net.Receive("WCG_Ultimate", function (len, player)
 		if(IsValid(player) and player:IsPlayer()) then
 			player_manager.RunClass( player, "Ultimate", 1 )
-			print("Ultimate recieved")
 		end
 	end)
 end
