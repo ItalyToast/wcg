@@ -142,6 +142,13 @@ function PLAYER:GetHandsModel()
 
 end
 
+function PLAYER:SetXP(xp)
+
+	self.xp = xp
+	db_set_xp(player, xp)
+	
+end
+
 function PLAYER:GainXP(xp)
 
 	self.xp = self.xp + xp

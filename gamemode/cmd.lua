@@ -1,10 +1,11 @@
 -----------------------------------------------------------
+--To be removed
+-----------------------------------------------------------
 function cmd_set_xp(player, cmd, args, argStr)
 	local amount = tonumber(argStr)
 	if(amount != nil) then
-		player.xp = amount
-		db_set_xp(player, amount)
-		player:SendRaceInfo()
+		player_manager.RunClass( player, "SetXP", amount)
+		player_manager.RunClass( player, "SendRaceInfo")
 		print( "set xp: " .. amount)
 	else
 		print("Bad argument: " + argStr)
