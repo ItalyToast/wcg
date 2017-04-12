@@ -6,7 +6,7 @@ function db_set_xp(player, xp, class)
 	if(isnumber(xp)) then
 		player:SetPData("class_" .. class .. "_xp", xp)
 	else
-		throw("not a number: xp")
+		print("db_set_xp: 'xp' is not a number")
 	end
 end
 
@@ -22,7 +22,7 @@ function db_set_level(player, level, class)
 	if(isnumber(level)) then
 		player:SetPData("class_" .. class .. "_level", level)
 	else
-		throw("not a number: level")
+		print("db_set_level: 'level' is not a number")
 	end
 end
 
@@ -38,7 +38,7 @@ function db_set_race(player, class)
 	if(isstring(class)) then
 		player:SetPData("selected_class", class)
 	else
-		throw("not a number: class")
+		print("db_set_race: 'class' is not a class")
 	end
 end
 
@@ -48,10 +48,13 @@ end
 
 --Networking
 function net_WCG_ChangeRace(len, player)
-	local class = net.ReadInt(32)
-	
-	player.Setclass(class)
-	db_set_race(class);
+	if(IsValid(player) and player:IsPlayer()) then
+		local class = net.ReadInt(32)
+		player.SetClass(class)
+		db_set_race(class)
+		player:ChatPrint("You will be '"..class.Name.."' next time you spawn.")
+	end
+
 end
 
 net.Receive("WCG_ChangeRace", net_WCG_ChangeRace)

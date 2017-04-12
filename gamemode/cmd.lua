@@ -31,7 +31,7 @@ end
 function cmd_spawn_prison_guard(player, cmd, args, argStr)
 	local npc = ents.Create( "npc_combine_s" )
 	if ( !IsValid( npc ) ) then return end // Check whether we successfully made an entity, if not - bail
-	npc:SetPos( player:GetPos() )
+	npc:SetPos( player:GetShootPos() )
 	npc:Spawn()
 end
 

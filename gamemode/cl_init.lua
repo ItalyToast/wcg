@@ -19,7 +19,7 @@ include("cl_xpbar.lua")
 function GM:Initialize()
 
 	GAMEMODE.ShowScoreboard = true
-
+	
 end
 
 --[[---------------------------------------------------------
@@ -34,11 +34,7 @@ end
 	Desc: Called every frame
 -----------------------------------------------------------]]
 function GM:Think()
-	local player = LocalPlayer()
-	if(IsValid(player) and player.GetXP != nil) then
-		local xp = player:GetXP()
-		XPBar.SetXP(XPBar, xp, 1000)
-	end
+	
 end
 
 --[[---------------------------------------------------------
@@ -47,6 +43,14 @@ end
 -----------------------------------------------------------]]
 function GM:PlayerBindPress( pl, bind, down )
 
+	if ( bind == "+use" and down) then
+		
+		net.Start("WCG_Ultimate")
+		net.SendToServer()
+		
+		return true
+	end
+	
 	return false
 
 end
