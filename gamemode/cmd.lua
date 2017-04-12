@@ -1,10 +1,11 @@
 -----------------------------------------------------------
+--To be removed
+-----------------------------------------------------------
 function cmd_set_xp(player, cmd, args, argStr)
 	local amount = tonumber(argStr)
 	if(amount != nil) then
-		player.xp = amount
-		db_set_xp(player, amount)
-		player:SendRaceInfo()
+		player_manager.RunClass( player, "SetXP", amount)
+		player_manager.RunClass( player, "SendRaceInfo")
 		print( "set xp: " .. amount)
 	else
 		print("Bad argument: " + argStr)
@@ -31,7 +32,7 @@ end
 function cmd_spawn_prison_guard(player, cmd, args, argStr)
 	local npc = ents.Create( "npc_combine_s" )
 	if ( !IsValid( npc ) ) then return end // Check whether we successfully made an entity, if not - bail
-	npc:SetPos( player:GetShootPos() )
+	npc:SetPos( player:GetEyeTrace().HitPos )
 	npc:Spawn()
 end
 

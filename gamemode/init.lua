@@ -17,7 +17,6 @@ include("cmd.lua")
 
 --Network Strings
 util.AddNetworkString("WCG_RaceState")
-util.AddNetworkString("WCG_ChangeRace")
 util.AddNetworkString("WCG_Ultimate")
 
 --Console commands
@@ -35,11 +34,13 @@ GM.PlayerSpawnTime = {}
    Desc: Called immediately after starting the gamemode
 -----------------------------------------------------------]]
 function GM:Initialize()
+
 	net.Receive("WCG_Ultimate", function (len, player)
 		if(IsValid(player) and player:IsPlayer()) then
 			player_manager.RunClass( player, "Ultimate", 1 )
 		end
 	end)
+	
 end
 
 --[[---------------------------------------------------------
