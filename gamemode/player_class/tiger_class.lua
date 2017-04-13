@@ -71,9 +71,13 @@ function PLAYER:Ultimate(level)
 		local dir = self.Player:GetAimVector()
 		--PrintTable(dir)
 		
-		dir:Mul(2000)
+		local pos = ent:GetPos()
+		pos.z = pos.z + 1
+		ent:SetPos(pos)
+		
+		dir:Mul(300)
 		if(dir.z < 0) then dir.z = 0 end
-		dir.z = dir.z + 300
+		dir.z = dir.z + 200
 		ent:SetVelocity( dir )
 		
 	else
