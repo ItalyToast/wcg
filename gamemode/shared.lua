@@ -15,6 +15,7 @@ include("player_class/base.lua")
 
 -- Races
 include("player_class/test_class.lua")
+include("player_class/tiger_class.lua")
 -- I'm A Race!!!
 
 include("player_shd.lua")

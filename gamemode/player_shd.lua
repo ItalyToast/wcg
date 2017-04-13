@@ -1,3 +1,4 @@
+AddCSLuaFile()
 
 --[[---------------------------------------------------------
    Name: gamemode:PlayerTraceAttack( )

@@ -182,10 +182,17 @@ function PLAYER:SendRaceInfo()
 	net.Send(self.Player)
 end
 
+--Virtual Functions
 function PLAYER:SetPassives(level)
 end
 
 function PLAYER:Ultimate(client, victim)
+end
+
+function PLAYER:PlayerTraceAttack( dmginfo, dir, trace )
+end
+
+function PLAYER:ScaleDamage( target, hitgroup, dmginfo )
 end
 
 CreateRace( "base", PLAYER, nil )

@@ -501,6 +501,45 @@ function GM:ScalePlayerDamage( ply, hitgroup, dmginfo )
 end
 
 --[[---------------------------------------------------------
+	Name: gamemode:ScaleNPCDamage( ply, hitgroup, dmginfo )
+	Desc: Scale the damage based on being shot in a hitbox
+		 Return true to not take damage
+-----------------------------------------------------------]]
+function GM:ScaleNPCDamage( npc, hitgroup, dmginfo )
+
+	print("Init Damage " .. dmginfo:GetDamage())
+	local oldinfo = dmginfo
+	
+	-- More damage if we're shot in the head
+	if ( hitgroup == HITGROUP_HEAD ) then
+	
+		dmginfo:ScaleDamage( 2 )
+		print("hs")
+	end
+	
+	-- Less damage if we're shot in the arms or legs
+	if ( hitgroup == HITGROUP_LEFTARM ||
+		 hitgroup == HITGROUP_RIGHTARM ||
+		 hitgroup == HITGROUP_LEFTLEG ||
+		 hitgroup == HITGROUP_RIGHTLEG ||
+		 hitgroup == HITGROUP_GEAR ) then
+	
+		dmginfo:ScaleDamage( 0.25 )
+	
+	end
+	
+	local attacker = dmginfo:GetAttacker()
+	if(attacker:IsPlayer()) then
+	
+		player_manager.RunClass(attacker, "ScaleDamage", npc, hitgroup, dmginfo)
+		
+	end
+	
+	print("Damage scaled from " .. oldinfo:GetDamage() .. " to " .. dmginfo:GetDamage())
+
+end
+
+--[[---------------------------------------------------------
 	Name: gamemode:PlayerDeathSound()
 	Desc: Return true to not play the default sounds
 -----------------------------------------------------------]]
