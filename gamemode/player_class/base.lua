@@ -76,6 +76,8 @@ function PLAYER:Loadout()
 	self.Player:Give( "weapon_crowbar" )
 	
 	self.Player:Give( "weapon_crossbow" )
+	
+	self.Player:Give( "weapon_ttt_m16" )
 
 end
 
