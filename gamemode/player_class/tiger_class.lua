@@ -82,6 +82,12 @@ PLAYER.abilities = { PLAYER.ability1, PLAYER.ability4 }
 
 function PLAYER:SetPassives(level)
 
+	for key,value in pairs(self.abilities) do
+		if(value.OnSpawn != nil) then
+			value:OnSpawn(self)
+		end
+	end
+	
 	-- Skill2
 	self.Player:SetJumpPower(200*self.skills[3].Values[level])
 end
