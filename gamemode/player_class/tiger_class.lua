@@ -38,6 +38,30 @@ PLAYER.skills[ultimate].Desc = "Dash towards target"
 PLAYER.skills[ultimate].MaxLevel = 4
 PLAYER.skills[ultimate].Values = {20, 30, 40, 50}
 
+PLAYER.ability1 = Ability.create("Claws", "Gives you bonus ranged and melee(2xBonus) attack damage")
+PLAYER.ability1.values = { 300, 400, 500 }
+PLAYER.ability1.Level = 1
+PLAYER.ability1.Sound = "player/jumplanding4.wav"
+PLAYER.ability1.OnActivate = function(self, player)
+
+	if(!player:IsOnGround())then
+		return true
+	end
+
+	local ent = player:GetViewEntity()
+	local dir = player:GetAimVector()
+	--PrintTable(dir)
+	
+	local pos = ent:GetPos()
+	pos.z = pos.z + 1
+	ent:SetPos(pos)
+	
+	dir:Mul(self.values[self.Level])
+	if(dir.z < 0) then dir.z = 0 end
+	dir.z = dir.z + 200
+	ent:SetVelocity( dir )
+end
+
 function PLAYER:SetPassives(level)
 
 	-- Skill2
@@ -60,6 +84,8 @@ end
 
 function PLAYER:Ultimate(level)
 	
+	PLAYER.ability1:Activate(self.Player)
+	
 	print("tiger")
 	
 	local ultimate_used = false
@@ -67,18 +93,7 @@ function PLAYER:Ultimate(level)
 	
 	if(curTime - self.ultimate_last_used >= self.ultimate_cd) then
 	
-		local ent = self.Player:GetViewEntity()
-		local dir = self.Player:GetAimVector()
-		--PrintTable(dir)
 		
-		local pos = ent:GetPos()
-		pos.z = pos.z + 1
-		ent:SetPos(pos)
-		
-		dir:Mul(300)
-		if(dir.z < 0) then dir.z = 0 end
-		dir.z = dir.z + 200
-		ent:SetVelocity( dir )
 		
 	else
 		self.Player:ChatPrint("Cooldown: "..math.floor(curTime - self.ultimate_last_used).."s/"..self.ultimate_cd..'s')
