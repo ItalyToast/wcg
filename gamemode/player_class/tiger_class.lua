@@ -38,13 +38,26 @@ PLAYER.skills[ultimate].Desc = "Dash towards target"
 PLAYER.skills[ultimate].MaxLevel = 4
 PLAYER.skills[ultimate].Values = {20, 30, 40, 50}
 
-
-PLAYER.ability1 = Ability.create("Dash", "Dash towards target")
-PLAYER.ability1.values = { 300, 400, 500 }
-PLAYER.ability1.Level = 1
+PLAYER.ability1 = Ability.create("Claws", "Gives you bonus ranged and melee(2xBonus) attack damage")
+PLAYER.ability1.values = {1.2, 1.4, 1.6, 1.8}
+PLAYER.ability1.Level = 2
 PLAYER.ability1.MaxLevel = 4
-PLAYER.ability1.Sound = "player/jumplanding4.wav"
-PLAYER.ability1.OnActivate = function(self, player)
+PLAYER.ability1.OnDealDamage = function(self, target, hitgroup, dmginfo)
+
+	local buff = self.values[self.Level]
+	dmginfo:ScaleDamage( buff )
+	if(dmginfo:GetDamageType() == DMG_CLUB) then
+		dmginfo:ScaleDamage( buff )
+	end
+	
+end
+
+PLAYER.ability4 = Ability.create("Dash", "Dash towards target")
+PLAYER.ability4.values = { 300, 400, 500 }
+PLAYER.ability4.Level = 1
+PLAYER.ability4.MaxLevel = 4
+PLAYER.ability4.Sound = "player/jumplanding4.wav"
+PLAYER.ability4.OnActivate = function(self, player)
 
 	if(!player:IsOnGround())then
 		return true
@@ -65,7 +78,7 @@ PLAYER.ability1.OnActivate = function(self, player)
 	
 end
 
-PLAYER.abilities = { PLAYER.ability1 }
+PLAYER.abilities = { PLAYER.ability1, PLAYER.ability4 }
 
 function PLAYER:SetPassives(level)
 
@@ -80,8 +93,10 @@ end
 function PLAYER:ScaleDamage( target, hitgroup, dmginfo )
 
 	for key,value in pairs(self.abilities) do
-		if(value.OnScaleDamage != nil) then
-			value:OnScaleDamage(target, hitgroup, dmginfo)
+		print(value.name)
+		if(value.OnDealDamage != nil) then
+			print(value.name .. 2)
+			value:OnDealDamage(target, hitgroup, dmginfo)
 		end
 	end
 
@@ -95,7 +110,7 @@ end
 
 function PLAYER:Ultimate(level)
 	
-	PLAYER.ability1:Activate(self.Player)
+	PLAYER.ability4:Activate(self.Player)
 
 end
 

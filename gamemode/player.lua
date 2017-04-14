@@ -476,7 +476,7 @@ end
 -----------------------------------------------------------]]
 function GM:ScalePlayerDamage( ply, hitgroup, dmginfo )
 	
-	local oldinfo = dmginfo
+	local olddmg = dmginfo:GetDamage()
 	
 	-- More damage if we're shot in the head
 	if ( hitgroup == HITGROUP_HEAD ) then
@@ -496,7 +496,7 @@ function GM:ScalePlayerDamage( ply, hitgroup, dmginfo )
 	
 	end
 	
-	print("Damage scaled from "..oldinfo.." to "..dmginfo)
+	print("Damage scaled from " .. olddmg .. " to " .. dmginfo)
 
 end
 
@@ -507,8 +507,7 @@ end
 -----------------------------------------------------------]]
 function GM:ScaleNPCDamage( npc, hitgroup, dmginfo )
 
-	print("Init Damage " .. dmginfo:GetDamage())
-	local oldinfo = dmginfo
+	local olddmg = dmginfo:GetDamage()
 	
 	-- More damage if we're shot in the head
 	if ( hitgroup == HITGROUP_HEAD ) then
@@ -535,7 +534,7 @@ function GM:ScaleNPCDamage( npc, hitgroup, dmginfo )
 		
 	end
 	
-	print("Damage scaled from " .. oldinfo:GetDamage() .. " to " .. dmginfo:GetDamage())
+	print("Damage scaled from " .. olddmg .. " to " .. dmginfo:GetDamage())
 
 end
 
