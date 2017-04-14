@@ -38,6 +38,7 @@ PLAYER.skills[ultimate].Desc = "Dash towards target"
 PLAYER.skills[ultimate].MaxLevel = 4
 PLAYER.skills[ultimate].Values = {20, 30, 40, 50}
 
+
 PLAYER.ability1 = Ability.create("Dash", "Dash towards target")
 PLAYER.ability1.values = { 300, 400, 500 }
 PLAYER.ability1.Level = 1
@@ -64,6 +65,8 @@ PLAYER.ability1.OnActivate = function(self, player)
 	
 end
 
+PLAYER.abilities = { PLAYER.ability1 }
+
 function PLAYER:SetPassives(level)
 
 	-- Skill2
@@ -76,11 +79,17 @@ end
 
 function PLAYER:ScaleDamage( target, hitgroup, dmginfo )
 
-	local buff = self.skills[1].Values[1]
-	dmginfo:ScaleDamage( buff )
-	if(dmginfo:GetDamageType() == DMG_CLUB) then
-		dmginfo:ScaleDamage( buff )
+	for key,value in pairs(self.abilities) do
+		if(value.OnScaleDamage != nil) then
+			value:OnScaleDamage(target, hitgroup, dmginfo)
+		end
 	end
+
+	--local buff = self.skills[1].Values[1]
+	--dmginfo:ScaleDamage( buff )
+	--if(dmginfo:GetDamageType() == DMG_CLUB) then
+	--	dmginfo:ScaleDamage( buff )
+	--end
 	
 end
 
