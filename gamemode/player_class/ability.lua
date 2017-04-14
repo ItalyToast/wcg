@@ -13,10 +13,10 @@ Ability.Sound				= "buttons/button5.wav"
 Ability.FailSound			= "buttons/button11.wav"
 
 --Eventhandlers
-Ability.OnActivate 			= function(self, player) print("using ability " .. self.name) end
-Ability.OnDealDamage		= nil
-Ability.OnReciveDamage		= nil
-Ability.OnSpawn				= nil
+Ability.OnActivate 			= function(self, player) print("using ability " .. self.name) end --(Ability self, Player player)
+Ability.OnDealDamage		= nil --(Ability self, Entity target, number hitgroup, CTakeDamageInfo dmginfo )
+Ability.OnReciveDamage		= nil --(Ability self, Entity attacker, number hitgroup, CTakeDamageInfo dmginfo )
+Ability.OnSpawn				= nil --(Ability self, Player player)
 
 function Ability.create(name, desc)
    local skill = {}

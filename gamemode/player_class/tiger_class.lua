@@ -4,7 +4,7 @@ local PLAYER = {}
 
 PLAYER.DisplayName 			= "Tiger"
 PLAYER.WalkSpeed 			= 100
-PLAYER.icon 				= "materials/icon16/basket.png"
+PLAYER.icon 				= "materials/icon16/anchor.png"
 
 PLAYER.skills = {}
 
@@ -106,12 +106,6 @@ function PLAYER:ScaleDamage( target, hitgroup, dmginfo )
 		end
 	end
 
-	--local buff = self.skills[1].Values[1]
-	--dmginfo:ScaleDamage( buff )
-	--if(dmginfo:GetDamageType() == DMG_CLUB) then
-	--	dmginfo:ScaleDamage( buff )
-	--end
-	
 end
 
 function PLAYER:Ultimate(level)
