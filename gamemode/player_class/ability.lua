@@ -7,11 +7,16 @@ Ability.desc				= ""
 Ability.cooldown 			= 10
 Ability.last_used			= 0
 Ability.ActivateOnSpawn 	= false
-Ability.OnActivate 			= function(player) print("using ability " .. self.name) end
 Ability.Level				= 0
 Ability.MaxLevel			= 0
 Ability.Sound				= "buttons/button5.wav"
 Ability.FailSound			= "buttons/button11.wav"
+
+--Eventhandlers
+Ability.OnActivate 			= function(self, player) print("using ability " .. self.name) end
+Ability.OnDealDamage		= nil
+Ability.OnReciveDamage		= nil
+Ability.OnSpawn				= nil
 
 function Ability.create(name, desc)
    local skill = {}
@@ -32,7 +37,7 @@ function Ability:Activate(player)
 	
 	local ent = player:GetViewEntity()
 	if(self.Level < 1) then
-		print("Ability: " .. self.name .. " not level up yet")
+		print("Ability: " .. self.name .. " not leveled up yet")
 		sound.Play( self.FailSound, ent:GetPos(), 75, 100, 1 )
 		return true
 	end

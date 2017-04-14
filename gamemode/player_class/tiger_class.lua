@@ -38,9 +38,10 @@ PLAYER.skills[ultimate].Desc = "Dash towards target"
 PLAYER.skills[ultimate].MaxLevel = 4
 PLAYER.skills[ultimate].Values = {20, 30, 40, 50}
 
-PLAYER.ability1 = Ability.create("Claws", "Gives you bonus ranged and melee(2xBonus) attack damage")
+PLAYER.ability1 = Ability.create("Dash", "Dash towards target")
 PLAYER.ability1.values = { 300, 400, 500 }
 PLAYER.ability1.Level = 1
+PLAYER.ability1.MaxLevel = 4
 PLAYER.ability1.Sound = "player/jumplanding4.wav"
 PLAYER.ability1.OnActivate = function(self, player)
 
@@ -60,6 +61,7 @@ PLAYER.ability1.OnActivate = function(self, player)
 	if(dir.z < 0) then dir.z = 0 end
 	dir.z = dir.z + 200
 	ent:SetVelocity( dir )
+	
 end
 
 function PLAYER:SetPassives(level)
@@ -85,21 +87,7 @@ end
 function PLAYER:Ultimate(level)
 	
 	PLAYER.ability1:Activate(self.Player)
-	
-	print("tiger")
-	
-	local ultimate_used = false
-	local curTime = CurTime()
-	
-	if(curTime - self.ultimate_last_used >= self.ultimate_cd) then
-	
-		
-		
-	else
-		self.Player:ChatPrint("Cooldown: "..math.floor(curTime - self.ultimate_last_used).."s/"..self.ultimate_cd..'s')
-	end
-	
-	return ultimate_used
+
 end
 
 CreateRace( "tiger_class", PLAYER, "base" )
