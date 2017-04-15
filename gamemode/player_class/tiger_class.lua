@@ -98,7 +98,7 @@ PLAYER.ability4.OnActivate = function(self, player)
 	
 end
 
-PLAYER.abilities = { PLAYER.ability1, PLAYER.ability2, PLAYER.ability4 }
+PLAYER.abilities = { PLAYER.ability1, PLAYER.ability2, PLAYER.ability3, PLAYER.ability4 }
 
 function PLAYER:SetPassives(level)
 
