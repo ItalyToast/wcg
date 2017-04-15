@@ -194,6 +194,14 @@ function PLAYER:LevelAbility(ab)
 	end
 end
 
+function PLAYER:ResetSkills(ab)
+
+	for k, v in self.abilities do
+		v.Level = 0
+	end
+	
+end
+
 --Virtual Functions
 function PLAYER:SetPassives(level)
 end
