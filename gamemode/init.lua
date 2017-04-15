@@ -21,7 +21,8 @@ util.AddNetworkString("WCG_Ultimate")
 
 --Console commands
 concommand.Add("wcg_changerace", cmd_changerace)
-concommand.Add("wcg_levelability", cmd_levelability)
+concommand.Add("wcg_levelskill", cmd_levelskill)
+concommand.Add("wcg_resetskills", cmd_resetskills)
 concommand.Add("wcg_set_xp", cmd_set_xp)
 concommand.Add("wcg_get_xp", cmd_get_xp)
 concommand.Add("wcg_gain_xp", cmd_gain_xp)
