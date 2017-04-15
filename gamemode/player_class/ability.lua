@@ -61,3 +61,9 @@ function Ability:Activate(player)
 	
 	return ultimate_used
 end
+
+function Ability:LevelUp()
+	if(self.Level < self.MaxLevel) then
+		self.Level = self.Level + 1
+	end
+end

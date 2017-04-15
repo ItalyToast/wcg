@@ -52,6 +52,27 @@ PLAYER.ability1.OnDealDamage = function(self, target, hitgroup, dmginfo)
 	
 end
 
+PLAYER.ability2 = Ability.create("Jump", "Gives you bonus jump height")
+PLAYER.ability2.values = {1.2, 1.4, 1.6, 1.8}
+PLAYER.ability2.Level = 1
+PLAYER.ability2.MaxLevel = 4
+PLAYER.ability2.OnSpawn = function(self, player)
+
+	player.Player:SetJumpPower(200*self.values[self.Level])
+	
+end
+
+PLAYER.ability3 = Ability.create("Evasion", "Gives you a chance to dodge bullets")
+PLAYER.ability3.values = {20, 40, 60, 80}
+PLAYER.ability3.Level = 1
+PLAYER.ability3.MaxLevel = 4
+PLAYER.ability3.OnReciveDamage = function(self, target, hitgroup, dmginfo)
+	local dodge = self.values[self.Level]
+	if(dodge >= math.random( 100 )) then
+		dmginfo:ScaleDamage( 0 )
+	end
+end
+
 PLAYER.ability4 = Ability.create("Dash", "Dash towards target")
 PLAYER.ability4.values = { 300, 400, 500 }
 PLAYER.ability4.Level = 1
@@ -65,7 +86,6 @@ PLAYER.ability4.OnActivate = function(self, player)
 
 	local ent = player:GetViewEntity()
 	local dir = player:GetAimVector()
-	--PrintTable(dir)
 	
 	local pos = ent:GetPos()
 	pos.z = pos.z + 1
@@ -78,7 +98,7 @@ PLAYER.ability4.OnActivate = function(self, player)
 	
 end
 
-PLAYER.abilities = { PLAYER.ability1, PLAYER.ability4 }
+PLAYER.abilities = { PLAYER.ability1, PLAYER.ability2, PLAYER.ability4 }
 
 function PLAYER:SetPassives(level)
 
@@ -88,8 +108,6 @@ function PLAYER:SetPassives(level)
 		end
 	end
 	
-	-- Skill2
-	self.Player:SetJumpPower(200*self.skills[3].Values[level])
 end
 
 function PLAYER:PlayerTraceAttack( dmginfo, dir, trace )

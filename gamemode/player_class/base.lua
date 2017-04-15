@@ -24,6 +24,7 @@ PLAYER.icon 				= "materials/icon16/arrow_in.png"
 PLAYER.xp					= 0
 PLAYER.xp_max				= 0
 PLAYER.level				= 0
+PLAYER.abilities			= {}
 
 PLAYER.ultimate_last_used 	= 0
 PLAYER.ultimate_cd 			= 10
@@ -182,6 +183,15 @@ function PLAYER:SendRaceInfo()
 	net.WriteInt(self.xp_max, 32)
 	net.WriteInt(self.level, 32)
 	net.Send(self.Player)
+end
+
+function PLAYER:LevelAbility(ab)
+	local ability = self.abilities[ab]
+	
+	if(ability != nil) then
+		ability:LevelUp()
+		print(ability.name .. " is now Level: " .. ability.Level .. "/" .. ability.MaxLevel)
+	end
 end
 
 --Virtual Functions
