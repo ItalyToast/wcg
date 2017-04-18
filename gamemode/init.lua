@@ -17,7 +17,7 @@ include("cmd.lua")
 
 --Network Strings
 util.AddNetworkString("WCG_RaceState")
-util.AddNetworkString("WCG_Ultimate")
+util.AddNetworkString("WCG_ActivateAbility")
 
 --Console commands
 concommand.Add("wcg_changerace", cmd_changerace)
@@ -37,9 +37,11 @@ GM.PlayerSpawnTime = {}
 -----------------------------------------------------------]]
 function GM:Initialize()
 
-	net.Receive("WCG_Ultimate", function (len, player)
+	net.Receive("WCG_ActivateAbility", function (len, player)
+		local abilityIndex = net.ReadInt(32)
+		
 		if(IsValid(player) and player:IsPlayer()) then
-			player_manager.RunClass( player, "Ultimate", 1 )
+			player_manager.RunClass( player, "ActivateAbility", abilityIndex)
 		end
 	end)
 	

@@ -6,71 +6,51 @@ PLAYER.DisplayName 			= "Test Class"
 PLAYER.WalkSpeed 			= 100
 PLAYER.icon 				= "materials/icon16/basket.png"
 
-PLAYER.skills = {}
+ability1 = Ability.create("Speed", "Gives you bonus speed")
+ability1.values = {240, 280, 320, 360}
+ability1.MaxLevel = 4
+ability1.OnSpawn = function(self, player)
 
-PLAYER.ultimate = 4
-local ultimate = PLAYER.ultimate
-PLAYER.ultimate_last_used = 0
-PLAYER.ultimate_cd = 10
-
-PLAYER.skills[1] = {}
-PLAYER.skills[2] = {}
-PLAYER.skills[3] = {}
-PLAYER.skills[ultimate] = {}
-
-PLAYER.skills[1].Name = "Speed"
-PLAYER.skills[1].Desc = "Gives you bonus speed"
-PLAYER.skills[1].MaxLevel = 4
-PLAYER.skills[1].Values = {2, 1.4, 1.6, 1.8}
-
-PLAYER.skills[2].Name = "Health"
-PLAYER.skills[2].Desc = "Gives you bonus health"
-PLAYER.skills[2].MaxLevel = 4
-PLAYER.skills[2].Values = {20, 40, 60, 100}
-
-PLAYER.skills[3].Name = "Jump"
-PLAYER.skills[3].Desc = "Gives you bonus jump height"
-PLAYER.skills[3].MaxLevel = 4
-PLAYER.skills[3].Values = {2, 1.4, 1.6, 1.8}
-
-PLAYER.skills[ultimate].Name = "Thunder Shock"
-PLAYER.skills[ultimate].Desc = "Shocks an enemy for damage"
-PLAYER.skills[ultimate].MaxLevel = 4
-PLAYER.skills[ultimate].Values = {200, 30, 40, 50}
-
-function PLAYER:SetPassives(level)
-	-- Skill0
-	self.Player:SetWalkSpeed(400*self.skills[1].Values[level])
+	player.Player:SetWalkSpeed(self.values[self.Level])
 	
-	-- Skill1
-	self.Player:SetHealth(100+self.skills[2].Values[level])
-	
-	-- Skill2
-	self.Player:SetJumpPower(200*self.skills[3].Values[level])
 end
 
-function PLAYER:Ultimate(level)
+ability2 = Ability.create("Health", "Gives you bonus health")
+ability2.values = {20, 40, 60, 100}
+ability2.MaxLevel = 4
+ability2.OnSpawn = function(self, player)
+
+	player.Player:SetHealth(100+(self.values[self.Level]))
 	
-	local ultimate_used = false
-	local curTime = CurTime()
+end
+
+ability3 = Ability.create("Jump", "Gives you bonus jump height")
+ability3.values = {240, 280, 320, 360}
+ability3.MaxLevel = 4
+ability3.OnSpawn = function(self, player)
+
+	player.Player:SetJumpPower(self.values[self.Level])
 	
-	if(curTime - self.ultimate_last_used >= self.ultimate_cd) then
-		local target = self.Player:GetEyeTrace()
+end
+
+ultimate = Ability.create("Thunder Shock", "Shocks an enemy for damage")
+ultimate.MaxLevel = 4
+ultimate.values = {200, 300, 400, 500}
+ultimate.Sound = "weapons/party_horn_01.wav"
+ultimate.OnActivate = function(self, player)
+
+	local target = player:GetEyeTrace()
 		
-		if(target.HitWorld == false) then
-			
-			local victim = target.Entity
-			
-			victim:TakeDamage(self.skills[self.ultimate].Values[level], self.Player, self.Player)
-			
-			ultimate_used = true
-			self.ultimate_last_used = curTime
-		end
-	else
-		self.Player:ChatPrint("Cooldown: "..math.floor(curTime - self.ultimate_last_used).."s/"..self.ultimate_cd..'s')
+	if(target.HitWorld == true) then
+		return true --we cancel the cast if we dont find a target
 	end
 	
-	return ultimate_used
+	local victim = target.Entity
+		
+	victim:TakeDamage(self.values[self.Level], player, player)
+	
 end
+
+PLAYER.abilities = { ability1, ability2, ability3, ultimate }
 
 CreateRace( "test_class", PLAYER, "base" )

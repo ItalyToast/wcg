@@ -33,7 +33,6 @@ function Ability:OnActivate(player)
 end
 
 function Ability:Activate(player)
-    print("tiger2")
 	
 	local ent = player:GetViewEntity()
 	if(self.Level < 1) then

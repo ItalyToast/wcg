@@ -237,9 +237,6 @@ function GM:PlayerSpawn( pl )
 	player_manager.RunClass( pl, "Spawn" )
 	player_manager.RunClass( pl, "SendRaceInfo" )
 	
-	-- Set PASSIVE skills
-	player_manager.RunClass( pl, "SetPassives", 1)
-
 	-- Call item loadout function
 	hook.Call( "PlayerLoadout", GAMEMODE, pl )
 	
@@ -496,12 +493,25 @@ function GM:ScalePlayerDamage( ply, hitgroup, dmginfo )
 	
 	end
 	
+	local attacker = dmginfo:GetAttacker()
+	if(attacker:IsPlayer()) then
+	
+		player_manager.RunClass(attacker, "DealDamage", ply, hitgroup, dmginfo)
+		
+	end
+	
+	if(ply:IsPlayer()) then
+	
+		player_manager.RunClass(ply, "ReciveDamage", attacker, hitgroup, dmginfo)
+		
+	end
+	
 	print("Damage scaled from " .. olddmg .. " to " .. dmginfo)
 
 end
 
 --[[---------------------------------------------------------
-	Name: gamemode:ScaleNPCDamage( ply, hitgroup, dmginfo )
+	Name: gamemode:ScaleNPCDamage( npc, hitgroup, dmginfo )
 	Desc: Scale the damage based on being shot in a hitbox
 		 Return true to not take damage
 -----------------------------------------------------------]]
@@ -530,7 +540,7 @@ function GM:ScaleNPCDamage( npc, hitgroup, dmginfo )
 	local attacker = dmginfo:GetAttacker()
 	if(attacker:IsPlayer()) then
 	
-		player_manager.RunClass(attacker, "ScaleDamage", npc, hitgroup, dmginfo)
+		player_manager.RunClass(attacker, "DealDamage", npc, hitgroup, dmginfo)
 		
 	end
 	

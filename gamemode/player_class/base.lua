@@ -24,10 +24,8 @@ PLAYER.icon 				= "materials/icon16/arrow_in.png"
 PLAYER.xp					= 0
 PLAYER.xp_max				= 0
 PLAYER.level				= 0
+PLAYER.unspent_levels		= 0
 PLAYER.abilities			= {}
-
-PLAYER.ultimate_last_used 	= 0
-PLAYER.ultimate_cd 			= 10
 
 --
 -- Name: PLAYER:SetupDataTables
@@ -58,6 +56,20 @@ function PLAYER:Spawn()
 	self.xp = db_get_xp(self.Player)
 	self.level = db_get_level(self.Player)
 	self.xp_max = self.level * 1000 + 1000
+	self.unspent_levels = self.level
+	
+	--Loading ability levels from DB
+	for key,value in pairs(self.abilities) do
+		value.Level = db_get_ability_level(self.Player, value)
+		self.unspent_levels = self.unspent_levels - value.Level
+	end
+	
+	--Activating Ability spawn handlers
+	for key,value in pairs(self.abilities) do
+		if(value.OnSpawn != nil and value.Level > 0) then
+			value:OnSpawn(self)
+		end
+	end
 
 end
 
@@ -188,10 +200,13 @@ end
 function PLAYER:LevelAbility(ab)
 	local ability = self.abilities[ab]
 	
-	if(ability != nil) then
-		ability:LevelUp()
-		print(ability.name .. " is now Level: " .. ability.Level .. "/" .. ability.MaxLevel)
-	end
+	if(ability == nil) then return end
+	if(self.unspent_levels <= 0) then return end
+	
+	self.unspent_levels = self.unspent_levels - 1
+	ability:LevelUp()
+	db_set_ability_level(self.Player, ability)
+	print(ability.name .. " is now Level: " .. ability.Level .. "/" .. ability.MaxLevel)
 end
 
 function PLAYER:ResetSkills(ab)
@@ -200,19 +215,44 @@ function PLAYER:ResetSkills(ab)
 		v.Level = 0
 	end
 	
+	self.unspent_levels = self.level
+	
 end
 
---Virtual Functions
-function PLAYER:SetPassives(level)
+function PLAYER:ActivateAbility(abilityIndex)
+
+	--Activating Ability Manual activation handlers (OnActivation)
+	local ability = self.abilities[abilityIndex]
+	if(ability == nil and value.Level > 0) then
+		print("No ability found: " .. abilityIndex)
+	else
+		ability:Activate(self.Player)
+	end
+	
 end
 
-function PLAYER:Ultimate(client, victim)
+function PLAYER:DealDamage( target, hitgroup, dmginfo )
+
+	--Activating Ability DealDamage handlers (OnDealDamage)
+	for key,value in pairs(self.abilities) do
+		if(value.OnDealDamage != nil and value.Level > 0) then
+			print(value.name)
+			value:OnDealDamage(target, hitgroup, dmginfo)
+		end
+	end
+
 end
 
-function PLAYER:PlayerTraceAttack( dmginfo, dir, trace )
-end
+function PLAYER:ReciveDamage( attacker, hitgroup, dmginfo )
 
-function PLAYER:ScaleDamage( target, hitgroup, dmginfo )
+	--Activating Ability ReciveDamage handlers (OnReciveDamage)
+	for key,value in pairs(self.abilities) do
+		if(value.OnDealDamage != nil and value.Level > 0) then
+			print(value.name)
+			value:OnReciveDamage(attacker, hitgroup, dmginfo)
+		end
+	end
+
 end
 
 CreateRace( "base", PLAYER, nil )
