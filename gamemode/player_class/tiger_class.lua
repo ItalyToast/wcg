@@ -20,11 +20,11 @@ ability1.OnDealDamage = function(self, target, hitgroup, dmginfo)
 end
 
 ability2 = Ability.create("Jump", "Gives you bonus jump height")
-ability2.values = {1.2, 1.4, 1.6, 1.8}
+ability2.values = {240, 280, 320, 360}
 ability2.MaxLevel = 4
 ability2.OnSpawn = function(self, player)
 
-	player.Player:SetJumpPower(200*self.values[self.Level])
+	player.Player:SetJumpPower(self.values[self.Level])
 	
 end
 
@@ -40,7 +40,7 @@ end
 
 ultimate = Ability.create("Dash", "Dash towards target")
 ultimate.values = { 300, 400, 500 }
-ultimate.MaxLevel = 4
+ultimate.MaxLevel = 3
 ultimate.Sound = "player/jumplanding4.wav"
 ultimate.OnActivate = function(self, player)
 
@@ -55,7 +55,8 @@ ultimate.OnActivate = function(self, player)
 	pos.z = pos.z + 1
 	ent:SetPos(pos)
 	
-	dir:Mul(self.values[self.Level])
+	local jumppower = self.values[self.Level]
+	dir:Mul(jumppower)
 	if(dir.z < 0) then dir.z = 0 end
 	dir.z = dir.z + 200
 	ent:SetVelocity( dir )
@@ -63,13 +64,5 @@ ultimate.OnActivate = function(self, player)
 end
 
 PLAYER.abilities = { ability1, ability2, ability3, ultimate }
-
-
-
-function PLAYER:Ultimate(level)
-	
-	PLAYER.ability4:Activate(self.Player)
-
-end
 
 CreateRace( "tiger_class", PLAYER, "base" )

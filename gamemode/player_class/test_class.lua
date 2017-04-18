@@ -46,8 +46,26 @@ ultimate.OnActivate = function(self, player)
 	end
 	
 	local victim = target.Entity
-		
-	victim:TakeDamage(self.values[self.Level], player, player)
+	
+	local forcevector = player:GetAimVector()
+	forcevector:Mul(20000)
+	forcevector.z = 100000
+	
+	local dmginfo = DamageInfo()
+	dmginfo:SetDamage(self.values[self.Level])
+	dmginfo:SetInflictor(player)
+	dmginfo:SetAttacker(player)
+	dmginfo:SetDamageForce(forcevector)
+	dmginfo:SetDamagePosition( player:GetPos() )
+	dmginfo:SetDamageType(DMG_BLAST)
+	dmginfo:SetReportedPosition( player:GetPos() )
+	victim:TakeDamageInfo(dmginfo)
+
+	local effectdata = EffectData()
+	effectdata:SetOrigin( victim:GetPos() )
+	effectdata:SetScale( 1 )
+	effectdata:SetMagnitude( 25 )
+	util.Effect("Explosion", effectdata)
 	
 end
 

@@ -59,6 +59,6 @@ end
 -----------------------------------------------------------
 function cmd_resetskills(player, cmd, args, argStr)
 
-	player_manager.RunClass(player, "ResetSkills", ability)
+	player_manager.RunClass(player, "ResetSkills")
 
 end

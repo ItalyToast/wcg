@@ -209,9 +209,9 @@ function PLAYER:LevelAbility(ab)
 	print(ability.name .. " is now Level: " .. ability.Level .. "/" .. ability.MaxLevel)
 end
 
-function PLAYER:ResetSkills(ab)
+function PLAYER:ResetSkills()
 
-	for k, v in self.abilities do
+	for k, v in pairs(self.abilities) do
 		v.Level = 0
 	end
 	
