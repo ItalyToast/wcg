@@ -10,20 +10,20 @@
 	{
 		1
 		{
-			"name"		"wcg_xp_per_kill"
+			"name"		"_xp_per_kill"
 			"text"		"Xp gained per kill"
 			"help"		"When current xp reaches the level requiment, you level up"
 			"type"		"Numeric"
-			"default"	"100"
+			"default"	"20"
 		}
 		
 		2
 		{
-			"name"		"wcg_deathmatch"
-			"text"		"Enable deathmatch"
-			"help"		"Otherwise teamdeathmatch"
-			"type"		"CheckBox"
-			"default"	"0"
+			"name"		"_xp_max_formula"
+			"text"		"Xp formula"
+			"help"		"When current xp reaches max, you level up"
+			"type"		"Text"
+			"default"	"200+level^2"
 		}
 		
 	}
