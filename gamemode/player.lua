@@ -506,7 +506,7 @@ function GM:ScalePlayerDamage( ply, hitgroup, dmginfo )
 		
 	end
 	
-	print("Damage scaled from " .. olddmg .. " to " .. dmginfo)
+	print("Damage scaled from " .. olddmg .. " to " .. dmginfo:GetDamage())
 
 end
 

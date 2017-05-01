@@ -201,12 +201,18 @@ function PLAYER:LevelAbility(ab)
 	local ability = self.abilities[ab]
 	
 	if(ability == nil) then return end
-	if(self.unspent_levels <= 0) then return end
+	if(self.unspent_levels <= 0) then
+		local msg  = "no level points available"
+		self.Player:PrintMessage(HUD_PRINTCONSOLE, msg)
+		return 
+	end
 	
 	self.unspent_levels = self.unspent_levels - 1
 	ability:LevelUp()
 	db_set_ability_level(self.Player, ability)
-	print(ability.name .. " is now Level: " .. ability.Level .. "/" .. ability.MaxLevel)
+	
+	local msg  = ability.name .. " is now Level: " .. ability.Level .. "/" .. ability.MaxLevel
+	self.Player:PrintMessage(HUD_PRINTCONSOLE, msg)
 end
 
 function PLAYER:ResetSkills()

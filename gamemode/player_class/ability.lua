@@ -1,3 +1,4 @@
+AddCSLuaFile()
 
 Ability = {}
 Ability.__index = Ability
