@@ -29,10 +29,6 @@ function Ability.create(name, desc)
    return skill
 end
 
-function Ability:OnActivate(player)
-	print("using ability " .. self.name) 
-end
-
 function Ability:Activate(player)
 	
 	local ent = player:GetViewEntity()

@@ -3,11 +3,11 @@ AddCSLuaFile()
 local PLAYER = {}
 
 PLAYER.DisplayName 			= "Test Class"
-PLAYER.WalkSpeed 			= 100
-PLAYER.icon 				= "materials/icon16/basket.png"
+PLAYER.WalkSpeed 			= 400
+PLAYER.icon 				= "icons/test_class.vtf"
 
 ability1 = Ability.create("Speed", "Gives you bonus speed")
-ability1.values = {240, 280, 320, 360}
+ability1.values = {440, 470, 505, 520}
 ability1.MaxLevel = 4
 ability1.OnSpawn = function(self, player)
 
