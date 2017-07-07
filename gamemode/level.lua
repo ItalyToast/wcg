@@ -6,14 +6,14 @@ function db_set_xp(player, xp, class)
 	if(isnumber(xp)) then
 		player:SetPData("class_" .. class .. "_xp", xp)
 	else
-		print("db_set_xp: 'xp' is not a number")
+		error("db_set_xp: 'xp' is not a number")
 	end
 end
 
 function db_get_xp(player, class)
 	if(class == nil) then class = player_manager.GetPlayerClass(player) end
 	
-	return player:GetPData("class_" .. class .. "_xp") or 0
+	return tonumber(player:GetPData("class_" .. class .. "_xp")) or 0
 end
 
 function db_set_level(player, level, class)
@@ -22,14 +22,30 @@ function db_set_level(player, level, class)
 	if(isnumber(level)) then
 		player:SetPData("class_" .. class .. "_level", level)
 	else
-		print("db_set_level: 'level' is not a number")
+		error("db_set_level: 'level' is not a number")
 	end
 end
 
 function db_get_level(player, class)
 	if(class == nil) then class = player_manager.GetPlayerClass(player) end
 	
-	return player:GetPData("class_" .. class .. "_level") or 0
+	return tonumber(player:GetPData("class_" .. class .. "_level")) or 0
+end
+
+function db_set_ability_level(player, ability, class)
+	if(class == nil) then class = player_manager.GetPlayerClass(player) end
+
+	if(isnumber(ability.Level)) then
+		player:SetPData("class_" .. class .. "_" .. ability.name .. "_level", ability.Level)
+	else
+		error("db_set_ability_level: 'level' is not a number")
+	end
+end
+
+function db_get_ability_level(player, ability, class)
+	if(class == nil) then class = player_manager.GetPlayerClass(player) end
+	
+	return tonumber(player:GetPData("class_" .. class .. "_" .. ability.name .. "_level")) or 0
 end
 
 function db_set_race(player, class)
@@ -38,7 +54,7 @@ function db_set_race(player, class)
 	if(isstring(class)) then
 		player:SetPData("selected_class", class)
 	else
-		print("db_set_race: 'class' is not a class")
+		error("db_set_race: 'class' is not a class")
 	end
 end
 

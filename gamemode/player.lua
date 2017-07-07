@@ -237,9 +237,6 @@ function GM:PlayerSpawn( pl )
 	player_manager.RunClass( pl, "Spawn" )
 	player_manager.RunClass( pl, "SendRaceInfo" )
 	
-	-- Set PASSIVE skills
-	player_manager.RunClass( pl, "SetPassives", 1)
-
 	-- Call item loadout function
 	hook.Call( "PlayerLoadout", GAMEMODE, pl )
 	
@@ -476,7 +473,7 @@ end
 -----------------------------------------------------------]]
 function GM:ScalePlayerDamage( ply, hitgroup, dmginfo )
 	
-	local oldinfo = dmginfo
+	local olddmg = dmginfo:GetDamage()
 	
 	-- More damage if we're shot in the head
 	if ( hitgroup == HITGROUP_HEAD ) then
@@ -496,7 +493,58 @@ function GM:ScalePlayerDamage( ply, hitgroup, dmginfo )
 	
 	end
 	
-	print("Damage scaled from "..oldinfo.." to "..dmginfo)
+	local attacker = dmginfo:GetAttacker()
+	if(attacker:IsPlayer()) then
+	
+		player_manager.RunClass(attacker, "DealDamage", ply, hitgroup, dmginfo)
+		
+	end
+	
+	if(ply:IsPlayer()) then
+	
+		player_manager.RunClass(ply, "ReciveDamage", attacker, hitgroup, dmginfo)
+		
+	end
+	
+	print("Damage scaled from " .. olddmg .. " to " .. dmginfo:GetDamage())
+
+end
+
+--[[---------------------------------------------------------
+	Name: gamemode:ScaleNPCDamage( npc, hitgroup, dmginfo )
+	Desc: Scale the damage based on being shot in a hitbox
+		 Return true to not take damage
+-----------------------------------------------------------]]
+function GM:ScaleNPCDamage( npc, hitgroup, dmginfo )
+
+	local olddmg = dmginfo:GetDamage()
+	
+	-- More damage if we're shot in the head
+	if ( hitgroup == HITGROUP_HEAD ) then
+	
+		dmginfo:ScaleDamage( 2 )
+		print("hs")
+	end
+	
+	-- Less damage if we're shot in the arms or legs
+	if ( hitgroup == HITGROUP_LEFTARM ||
+		 hitgroup == HITGROUP_RIGHTARM ||
+		 hitgroup == HITGROUP_LEFTLEG ||
+		 hitgroup == HITGROUP_RIGHTLEG ||
+		 hitgroup == HITGROUP_GEAR ) then
+	
+		dmginfo:ScaleDamage( 0.25 )
+	
+	end
+	
+	local attacker = dmginfo:GetAttacker()
+	if(attacker:IsPlayer()) then
+	
+		player_manager.RunClass(attacker, "DealDamage", npc, hitgroup, dmginfo)
+		
+	end
+	
+	print("Damage scaled from " .. olddmg .. " to " .. dmginfo:GetDamage())
 
 end
 

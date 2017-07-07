@@ -12,9 +12,11 @@
 -- Base Race
 include("player_class/class_list.lua")
 include("player_class/base.lua")
+include("player_class/ability.lua")
 
 -- Races
 include("player_class/test_class.lua")
+include("player_class/tiger_class.lua")
 -- I'm A Race!!!
 
 include("player_shd.lua")

@@ -1,3 +1,5 @@
+AddCSLuaFile()
+
 AllRaces = {}
 
 function CreateRace(name, table, base)
