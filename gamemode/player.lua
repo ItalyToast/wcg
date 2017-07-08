@@ -95,9 +95,6 @@ util.AddNetworkString( "PlayerKilledByPlayer" )
 	Desc: Called when a player dies.
 -----------------------------------------------------------]]
 function GM:PlayerDeath( ply, inflictor, attacker )
-	
-	--wcg OnDeath event
-	player_manager:RunClass(ply, "OnDeath", inflictor, attacker)
 
 	-- Don't spawn for at least 2 seconds
 	ply.NextSpawnTime = CurTime() + 2
@@ -159,6 +156,9 @@ function GM:PlayerDeath( ply, inflictor, attacker )
 	net.Broadcast()
 	
 	MsgAll( ply:Nick() .. " was killed by " .. attacker:GetClass() .. "\n" )
+	
+	--wcg OnDeath event
+	player_manager:RunClass(ply, "OnDeath", inflictor, attacker)
 	
 end
 
