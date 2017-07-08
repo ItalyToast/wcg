@@ -2,9 +2,9 @@ AddCSLuaFile()
 
 local PLAYER = {}
 
-PLAYER.DisplayName 			= "Test Class"
+PLAYER.DisplayName 			= "Starter"
 PLAYER.WalkSpeed 			= 400
-PLAYER.icon 				= "icons/test_class.vtf"
+PLAYER.icon 				= "icons/starter.png"
 
 ability1 = Ability.create("Speed", "Gives you bonus speed")
 ability1.values = {440, 470, 505, 520}
@@ -71,4 +71,4 @@ end
 
 PLAYER.abilities = { ability1, ability2, ability3, ultimate }
 
-CreateRace( "test_class", PLAYER, "base" )
+CreateRace( "starter", PLAYER, "base" )

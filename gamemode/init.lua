@@ -14,7 +14,6 @@ include("shared.lua")
 include("level.lua")
 include("player.lua")
 include("cmd.lua")
-include("content.lua")
 
 --Network Strings
 util.AddNetworkString("WCG_RaceState")

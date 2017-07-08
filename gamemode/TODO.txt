@@ -1,0 +1,5 @@
+* Klassen updateras direkt vid byte men inte EXP:n
+* Fler klasser (Gärna någon med entity grej)
+* Klass info vid cr
+* Levla abilities
+* Någon "character menu"

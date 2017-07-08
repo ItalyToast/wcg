@@ -2,7 +2,7 @@ AddCSLuaFile()
 
 local PLAYER = {}
 
-PLAYER.DisplayName 			= "Tiger"
+PLAYER.DisplayName 			= "Starter"
 PLAYER.WalkSpeed 			= 100
 PLAYER.icon 				= "icons/tiger_class.png"
 

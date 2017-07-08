@@ -159,6 +159,10 @@ function PLAYER:GetHandsModel()
 
 end
 
+function PLAYER:GetIcon()
+	return self.icon
+end
+
 function PLAYER:SetXP(xp)
 
 	self.xp = xp

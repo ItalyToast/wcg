@@ -1,1 +1,0 @@
-resource.AddFile( "icons/test_class.png" )
