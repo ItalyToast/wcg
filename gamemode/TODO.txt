@@ -1,9 +1,8 @@
 TODO:
 * Klassen updateras direkt vid byte men inte EXP:n
-* Fler klasser (Gärna någon med entity grej)
+* Fler klasser
 * Klass info vid cr
-* Levla abilities
-* Någon "character menu"
+* Någon "character menu" levla abilities
 * Sidor vid cr
 * Dynamisk includering i shared.lua på klasser
 * Fixa Freeze på friz ( Gärna frozen får effekt på skärm med )
