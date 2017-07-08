@@ -4,7 +4,6 @@ TODO:
 * Klass info vid cr
 * Någon "character menu" levla abilities
 * Sidor vid cr
-* Dynamisk includering i shared.lua på klasser
 * Fixa Freeze på friz ( Gärna frozen får effekt på skärm med )
 * Fixa modeller till klasser
 
