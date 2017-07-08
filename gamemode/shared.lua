@@ -9,13 +9,17 @@
 
 -----------------------------------------------------------]]
 
--- Base Race
-include("player_class/class_list.lua")
-include("player_class/base.lua")
+-- Base Races
+include("player_class/common/class_list.lua")
+include("player_class/common/ability.lua")
+include("player_class/common/base.lua")
 
--- Races
-include("player_class/test_class.lua")
--- I'm A Race!!!
+-- Include all races
+local files = file.Find( "wcg/gamemode/player_class/*", "LUA" )
+
+for _,file in pairs(files) do
+	include("player_class/"..file)
+end
 
 include("player_shd.lua")
 

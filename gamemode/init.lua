@@ -17,10 +17,12 @@ include("cmd.lua")
 
 --Network Strings
 util.AddNetworkString("WCG_RaceState")
-util.AddNetworkString("WCG_Ultimate")
+util.AddNetworkString("WCG_ActivateAbility")
 
 --Console commands
 concommand.Add("wcg_changerace", cmd_changerace)
+concommand.Add("wcg_levelskill", cmd_levelskill)
+concommand.Add("wcg_resetskills", cmd_resetskills)
 concommand.Add("wcg_set_xp", cmd_set_xp)
 concommand.Add("wcg_get_xp", cmd_get_xp)
 concommand.Add("wcg_gain_xp", cmd_gain_xp)
@@ -35,9 +37,11 @@ GM.PlayerSpawnTime = {}
 -----------------------------------------------------------]]
 function GM:Initialize()
 
-	net.Receive("WCG_Ultimate", function (len, player)
+	net.Receive("WCG_ActivateAbility", function (len, player)
+		local abilityIndex = net.ReadInt(32)
+		
 		if(IsValid(player) and player:IsPlayer()) then
-			player_manager.RunClass( player, "Ultimate", 1 )
+			player_manager.RunClass( player, "ActivateAbility", abilityIndex)
 		end
 	end)
 	
@@ -55,7 +59,6 @@ end
    Desc: Called every frame
 -----------------------------------------------------------]]
 function GM:Think()
-
 end
 
 --[[---------------------------------------------------------

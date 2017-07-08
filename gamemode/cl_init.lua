@@ -45,14 +45,18 @@ function GM:PlayerBindPress( pl, bind, down )
 
 	if ( bind == "+use" and down) then
 		
-		net.Start("WCG_Ultimate")
+		net.Start("WCG_ActivateAbility")
+		net.WriteInt(4, 32)
 		net.SendToServer()
 		
 		return true
 	end
 	
+	if ( (bind == "+jump" and down) or (bind == "jump" and down)) then
+		player_manager.RunClass(pl, "OnJump")
+	end
+	
 	return false
-
 end
 
 --[[---------------------------------------------------------

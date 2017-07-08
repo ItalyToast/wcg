@@ -32,7 +32,6 @@ local PLAYER_LINE = {
 		self.RaceIcon = self:Add( "DImage" )
 		self.RaceIcon:Dock( LEFT )
 		self.RaceIcon:SetSize( 32, 32 )
-		self.RaceIcon:SetImage( "materials/icon16/arrow_in.png" )
 
 		self.Name = self:Add( "DLabel" )
 		self.Name:Dock( FILL )
@@ -75,7 +74,7 @@ local PLAYER_LINE = {
 	Setup = function( self, pl )
 
 		self.Player = pl
-
+	
 		self.Avatar:SetPlayer( pl )
 		
 		self:Think( self )
@@ -92,11 +91,11 @@ local PLAYER_LINE = {
 			self:Remove()
 			return
 		end
-
-		if ( self.PName == nil || self.PName != self.Player:Nick() ) then
-			self.PName = self.Player:Nick()
-			
-			self.Name:SetText( self.PName )
+		
+		--Curr Race
+		local icon = player_manager.RunClass( self.Player, "GetIcon" )
+		if ( icon != nil ) then
+			self.RaceIcon:SetImage(icon)
 		end
 		
 		if ( self.NumKills == nil || self.NumKills != self.Player:Frags() ) then
@@ -144,17 +143,6 @@ local PLAYER_LINE = {
 		-- Careful though, it's a signed short internally, so needs to range between -32,768k and +32,767
 		--
 		self:SetZPos( ( self.NumKills * -50 ) + self.NumDeaths + self.Player:EntIndex() )
-
-		--
-		--setting Player Class Icon
-		--
-		local class = player_manager.GetPlayerClass(self.Player)
-		local classImage = "materials/icon16/arrow_in.png"
-		if(class == "base") then classImage = "materials/icon16/arrow_in.png" end
-		if(class == "test_class") then classImage = "materials/icon16/basket.png" end
-		if(class == 2) then classImage = "materials/icon16/bell.png" end
-		
-		self.RaceIcon:SetImage(classImage)
 		
 	end,
 

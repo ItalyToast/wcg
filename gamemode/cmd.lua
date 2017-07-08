@@ -45,3 +45,20 @@ function cmd_changerace(player, cmd, args, argStr)
 		db_set_race(player)
 	end
 end
+
+-----------------------------------------------------------
+function cmd_levelskill(player, cmd, args, argStr)
+	local ability = tonumber(args[1])
+	if(ability != nil) then
+		player_manager.RunClass(player, "LevelAbility", ability)
+	else
+		print("Bad argument: " + argStr)
+	end
+end
+
+-----------------------------------------------------------
+function cmd_resetskills(player, cmd, args, argStr)
+
+	player_manager.RunClass(player, "ResetSkills")
+
+end

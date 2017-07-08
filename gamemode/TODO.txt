@@ -1,0 +1,21 @@
+TODO:
+* Klassen updateras direkt vid byte men inte EXP:n
+* Fler klasser
+* Klass info vid cr
+* Någon "character menu" levla abilities
+* Sidor vid cr
+* Fixa Freeze på friz ( Gärna frozen får effekt på skärm med )
+* Fixa modeller till klasser
+
+
+
+Idéer på abilities:
+* Disarm
+* Landa gör något
+* Gravitet skit (onhit + ultimate)
+* Eld ability
+* Spawnar någon enity
+* Spawnar någon entity som följer efter en
+* On death
+* Resurect när man dör
+* Spawn entity on event
