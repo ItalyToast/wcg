@@ -95,6 +95,9 @@ util.AddNetworkString( "PlayerKilledByPlayer" )
 	Desc: Called when a player dies.
 -----------------------------------------------------------]]
 function GM:PlayerDeath( ply, inflictor, attacker )
+	
+	--wcg OnDeath event
+	player_manager:RunClass(ply, "OnDeath", inflictor, attacker)
 
 	-- Don't spawn for at least 2 seconds
 	ply.NextSpawnTime = CurTime() + 2
@@ -724,6 +727,8 @@ function GM:OnPlayerHitGround( ply, bInWater, bOnFloater, flFallSpeed )
 	-- then return true to disable the default action
 	--MsgN( ply, bInWater, bOnFloater, flFallSpeed )
 	--return true
+	
+	player_manager.RunClass(ply, "OnLand", bInWater, bOnFloater, flFallSpeed)
 	
 end
 

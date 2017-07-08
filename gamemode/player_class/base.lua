@@ -231,7 +231,7 @@ end
 
 function PLAYER:ActivateAbility(abilityIndex)
 
-	--Activating Ability Manual activation handlers (OnActivation)
+	--Activating Ability Manual activation handlers (OnActivation) cl_init.lua
 	local ability = self.abilities[abilityIndex]
 	if(ability == nil and value.Level > 0) then
 		print("No ability found: " .. abilityIndex)
@@ -241,9 +241,21 @@ function PLAYER:ActivateAbility(abilityIndex)
 	
 end
 
+function PLAYER:OnDeath( inflictor, attacker )
+
+	--Activating Ability OnDeath handlers (???) player.lua
+	for key,value in pairs(self.abilities) do
+		if(value.OnDeath != nil and value.Level > 0) then
+			print(value.name)
+			value:OnDeath()
+		end
+	end
+
+end
+
 function PLAYER:OnJump()
 
-	--Activating Ability OnJump handlers (???)
+	--Activating Ability OnJump handlers (???) cl_init.lua
 	for key,value in pairs(self.abilities) do
 		if(value.OnJump != nil and value.Level > 0) then
 			print(value.name)
@@ -253,9 +265,21 @@ function PLAYER:OnJump()
 
 end
 
+function PLAYER:OnLand( bInWater, bOnFloater, flFallSpeed )
+
+	--Activating Ability OnLand handlers (???) player.lua
+	for key,value in pairs(self.abilities) do
+		if(value.OnLand != nil and value.Level > 0) then
+			print(value.name)
+			value:OnLand()
+		end
+	end
+
+end
+
 function PLAYER:DealDamage( target, hitgroup, dmginfo )
 
-	--Activating Ability DealDamage handlers (OnDealDamage)
+	--Activating Ability DealDamage handlers (OnDealDamage) player.lua
 	for key,value in pairs(self.abilities) do
 		if(value.OnDealDamage != nil and value.Level > 0) then
 			print(value.name)
@@ -267,7 +291,7 @@ end
 
 function PLAYER:ReciveDamage( attacker, hitgroup, dmginfo )
 
-	--Activating Ability ReciveDamage handlers (OnReciveDamage)
+	--Activating Ability ReciveDamage handlers (OnReciveDamage) player.lua
 	for key,value in pairs(self.abilities) do
 		if(value.OnDealDamage != nil and value.Level > 0) then
 			print(value.name)
