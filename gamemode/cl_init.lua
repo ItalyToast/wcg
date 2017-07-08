@@ -52,8 +52,11 @@ function GM:PlayerBindPress( pl, bind, down )
 		return true
 	end
 	
+	if ( (bind == "+jump" and down) or (bind == "jump" and down)) then
+		player_manager.RunClass(pl, "OnJump")
+	end
+	
 	return false
-
 end
 
 --[[---------------------------------------------------------

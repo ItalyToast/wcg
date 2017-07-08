@@ -55,7 +55,6 @@ function RacePicker:ShowRace(player)
 			
 			-- Move down
 			y = y + 145
-			
 		end
 	end
 

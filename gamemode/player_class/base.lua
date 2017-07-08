@@ -241,6 +241,18 @@ function PLAYER:ActivateAbility(abilityIndex)
 	
 end
 
+function PLAYER:OnJump()
+
+	--Activating Ability OnJump handlers (???)
+	for key,value in pairs(self.abilities) do
+		if(value.OnJump != nil and value.Level > 0) then
+			print(value.name)
+			value:OnJump()
+		end
+	end
+
+end
+
 function PLAYER:DealDamage( target, hitgroup, dmginfo )
 
 	--Activating Ability DealDamage handlers (OnDealDamage)

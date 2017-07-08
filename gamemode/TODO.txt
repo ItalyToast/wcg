@@ -3,3 +3,5 @@
 * Klass info vid cr
 * Levla abilities
 * Någon "character menu"
+* Sidor vid cr
+* Dynamisk includering i shared.lua på klasser

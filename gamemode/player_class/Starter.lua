@@ -3,7 +3,6 @@ AddCSLuaFile()
 local PLAYER = {}
 
 PLAYER.DisplayName 			= "Starter"
-PLAYER.WalkSpeed 			= 400
 PLAYER.icon 				= "icons/starter.png"
 
 ability1 = Ability.create("Speed", "Gives you bonus speed")
