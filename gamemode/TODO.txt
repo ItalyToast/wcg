@@ -19,3 +19,12 @@ Idéer på abilities:
 * On death
 * Resurect när man dör
 * Spawn entity on event
+
+- Entity:Ignite
+- ENT:Touch
+- Entity:AddEffects
+- Entity:SetColor
+- Entity:SetGravity
+- Entity:SetPlaybackRate?
+- Entity:StartMotionController?
+- Entity:SetVelocity
