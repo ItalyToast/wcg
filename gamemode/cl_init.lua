@@ -48,12 +48,12 @@ function GM:PlayerBindPress( pl, bind, down )
 		net.Start("WCG_ActivateAbility")
 		net.WriteInt(4, 32)
 		net.SendToServer()
-		
 		return true
-	end
-	
-	if ( (bind == "+jump" and down) or (bind == "jump" and down)) then
-		player_manager.RunClass(pl, "OnJump")
+		
+	elseif ( bind == "+jump" and down) then
+		net.Start("WCG_OnJump")
+		net.SendToServer()
+		return true
 	end
 	
 	return false

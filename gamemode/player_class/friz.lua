@@ -33,7 +33,6 @@ ability2 = Ability.create("Agile", "Gives you bonus jump speed")
 ability2.values = {240, 280, 320, 360}
 ability2.MaxLevel = 4
 ability2.OnJump = function(self, player)
-
 	if(!player:IsOnGround())then
 		return true
 	end

@@ -259,7 +259,7 @@ function PLAYER:OnJump()
 	for key,value in pairs(self.abilities) do
 		if(value.OnJump != nil and value.Level > 0) then
 			print(value.name)
-			value:OnJump()
+			value:OnJump(self.Player)
 		end
 	end
 

@@ -18,6 +18,7 @@ include("cmd.lua")
 --Network Strings
 util.AddNetworkString("WCG_RaceState")
 util.AddNetworkString("WCG_ActivateAbility")
+util.AddNetworkString("WCG_OnJump")
 
 --Console commands
 concommand.Add("wcg_changerace", cmd_changerace)
@@ -42,6 +43,12 @@ function GM:Initialize()
 		
 		if(IsValid(player) and player:IsPlayer()) then
 			player_manager.RunClass( player, "ActivateAbility", abilityIndex)
+		end
+	end)
+	
+	net.Receive("WCG_OnJump", function (len, player)
+		if(IsValid(player) and player:IsPlayer()) then
+			player_manager.RunClass(player, "OnJump")
 		end
 	end)
 	
